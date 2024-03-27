@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "name_generator", menuName = "ScriptableObject/name_generator", order = 2)]
+[CreateAssetMenu(fileName = "name_generator", menuName = "ScriptableObject/name_generator", order = 1)]
 public class Name_Generator : ScriptableObject
 {
     [SerializeField]
