@@ -23,13 +23,6 @@ public class Pitcher_Stats : ScriptableObject
     private int pStamina = 100;
     [SerializeField]
     private bool hand = false; // false = right , true = left
-    [SerializeField]
-    private int age = 20; //현재 나이
-    [SerializeField]
-    private int g_age = 30; // 성장할 수 있는 나이(?) 이 나이 이후로는 성장이 거의 없다시피 할 것.
-    [SerializeField]
-    private int c_age = 37; // 에이징 커브가 시작 될 나이. 이때부터 능력치가 감소하기 시작한다.
-
 
     // Constructor
     public Pitcher_Stats()
@@ -42,14 +35,8 @@ public class Pitcher_Stats : ScriptableObject
         control = Random.Range(0,pControl + 1);
         stamina = Random.Range (0,pStamina + 1);
 
-        g_age = Random.Range(-2, 3) + 30;
-        c_age = Random.Range(-2, 3) + 37;
-
         if (Random.Range(0, 100) > 75) hand = true;
         else hand = false;
-
-        if (Random.Range(0, 100) > 90) age = 23; //대졸 draft
-        else age = 20; //고졸 draft
     }
     public void ReuseData()
     {
@@ -61,37 +48,7 @@ public class Pitcher_Stats : ScriptableObject
         control = Random.Range(0, pControl + 1);
         stamina = Random.Range(0, pStamina + 1);
 
-        g_age = Random.Range(-2, 3) + 30;
-        c_age = Random.Range(-2, 3) + 37;
-
         if (Random.Range(0, 100) > 75) hand = true;
         else hand = false;
-
-        if (Random.Range(0, 100) > 90) age = 23;
-        else age = 20;
     }
-
-    public void Retirement() //선수 은퇴 ---> 비활성화 할 것
-    {
-
-    }
-
-    public void Aged()
-    {
-        age++;
-
-        if(age <= g_age) //성장할 수 있는 나이
-        {
-
-        }
-        else if(age <= c_age) //성장이 멈추는 나이
-        {
-
-        }
-        else //에이징 커브가 시작되는 나이
-        {
-
-        }
-    }
-
 }
