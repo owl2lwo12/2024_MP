@@ -30,7 +30,7 @@ public class Human : MonoBehaviour
     private int injuredtime = 0; //부상이 지속되는 기간
     [SerializeField]
     private injury injured = injury.fine; //부상 종류
-
+    
     public Human()
     {
         g_age = Random.Range(-2, 3) + 30;
