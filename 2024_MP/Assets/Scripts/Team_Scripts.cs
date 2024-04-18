@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "team_template", menuName = "ScriptableObject/team_template", order = 4)]
-public class Team_Scripts : ScriptableObject
+public class Team_Scripts : MonoBehaviour
 {
     private static int max_player = 65; // kbo규정에 따르면 구단의 최대 등록 인원은 65명으로 구성된다.
     [SerializeField]

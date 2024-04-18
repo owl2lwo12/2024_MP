@@ -11,8 +11,7 @@ using UnityEngine;
 // 수비 포지션 알아보기 쉽게, 각 1루 2루 유격 3루 포수 좌익 중견 우익 순
 public enum def_position { B1, B2, SS, B3, C, LF, CF, RF};
 
-[CreateAssetMenu(fileName = "batter_stats",menuName = "ScriptableObject/batter_stats",order = 3)]
-public class Batter_Stats : ScriptableObject
+public class Batter_Stats : Human
 {
     //stats
     //normal naming : current stats | p_ : potential of stats
@@ -80,14 +79,13 @@ public class Batter_Stats : ScriptableObject
         p_speed = Random.Range(20, 101);
         p_intelligence = Random.Range(20, 101);
         p_eye = Random.Range(20, 101);
-        p_defense = Random.Range(20, 101);
         p_contact = Random.Range(20, 101);
 
         power = Random.Range(0, p_power);
         speed = Random.Range(0, p_speed);
         intelligence = Random.Range(0, p_intelligence);
         eye = Random.Range(0, p_eye);
-        defense = Random.Range(0, p_defense);
+        defense = Random.Range(20, 101);
         contact = Random.Range(0, p_contact);
 
         if (Random.Range(0, 100) > 40) hand = true;

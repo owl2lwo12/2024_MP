@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "pitcher_stats", menuName = "ScriptableObject/pitcher_stats", order = 2)]
-public class Pitcher_Stats : ScriptableObject
+public class Pitcher_Stats : Human
 {
     //stats
     //현재 투수의 stat을 세부적으로 구성하고 다루기엔 시간이 많이 부족할 것 같다.
