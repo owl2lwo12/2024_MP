@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
@@ -8,8 +9,8 @@ namespace UI
     public class TabMenuManager : MonoBehaviour
     {
         [SerializeField] private List<Button> _btns = new List<Button>();
-        public Color onClickedColor;
-        public Color notClickedColor;
+        public Color offColor;
+        public Color onColor;
         
         
         // Start is called before the first frame update
@@ -27,6 +28,8 @@ namespace UI
                 int index = i;
                 btn.GetComponent<Button>().onClick.AddListener(() => OnLoadPanel(index));
             }
+            
+            OnLoadPanel(transform.childCount - 1);
         }
 
         public void OnLoadPanel(int level)
@@ -37,13 +40,13 @@ namespace UI
                 {
                     _btns[i].transform.GetChild(0).gameObject.SetActive(true);
                     TextMeshProUGUI btnText = _btns[i].GetComponentInChildren<TextMeshProUGUI>();
-                    btnText.color = onClickedColor;
+                    btnText.color = onColor;
                 }
                 else
                 {
                     _btns[i].transform.GetChild(0).gameObject.SetActive(false);
                     TextMeshProUGUI btnText = _btns[i].GetComponentInChildren<TextMeshProUGUI>();
-                    btnText.color = notClickedColor;
+                    btnText.color = offColor;
                 }
             }
         }
