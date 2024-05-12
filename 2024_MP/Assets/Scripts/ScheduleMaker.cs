@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public struct match
@@ -11,10 +13,23 @@ public struct match
         home = h;
         away = a;
     }
+
+    public int getHome()
+    {
+        return home;
+    }
+    public int getAway()
+    {
+        return away;
+    }
 }
 public struct day_schedule
 {
     match[] matches;
+    public match getMatch(int idx)
+    {
+        return matches[idx];
+    }
     public day_schedule(match a,match b,match c, match d, match e)
     {
         matches = new match[5];
@@ -23,6 +38,24 @@ public struct day_schedule
         matches[2] = c;
         matches[3] = d;
         matches[4] = e;
+    }
+    public int find_match(int a) //매치들에서 상대 찾기
+    {
+        int result = 0;
+        for(int i = 0; i < 5; i++)
+        {
+            if(matches[i].getHome() == a)
+            {
+                result = matches[i].getAway();
+                break;
+            }
+            if (matches[i].getAway() == a)
+            {
+                result = matches[i].getHome();
+                break;
+            }
+        }
+        return result;
     }
 }
 /// <summary>
@@ -42,6 +75,10 @@ public class ScheduleMaker : MonoBehaviour
 {
     private day_schedule[] schedule = new day_schedule[144];
 
+    public day_schedule getSched(int idx)
+    {
+        return schedule[idx];
+    }
     public void MakeSchedule()
     {
         match m1 = new match(1, 6);
@@ -52,32 +89,96 @@ public class ScheduleMaker : MonoBehaviour
         // 첫 두 경기는 등수대로 진행된다.
         schedule[0] = new day_schedule(m1, m2, m3, m4, m5);
         schedule[1] = new day_schedule(m1, m2, m3, m4, m5);
-
-        int[,] home_match = new int[10,10];// int[i,j] 에서 
-        int[,] away_match = new int[10,10];// i-1 : 각 팀의 등수, j : 타 팀과 남은 연전 수
-        // count를 초기화 먼저 진행할 것이다. 
-        for(int i = 0; i < 10; i++)
+        int idx_fys = 2;
+        List<int> fys;
+        for (int j = 0; j < 4; j++) //여기서 3연전이 진행될 것
         {
-            for(int j = 0; j < 10; j++)
+            fys = Shuffle_Fisher_Yates(10);
+            for(int k =0; k < 9; k++)
             {
-                if (i != j)
+                m1 = new match(fys[0], fys[9]);
+                m2 = new match(fys[1], fys[8]);
+                m3 = new match(fys[2], fys[7]);
+                m4 = new match(fys[3], fys[6]);
+                m5 = new match(fys[4], fys[5]);
+                schedule[idx_fys] = new day_schedule(m1,m2,m3,m4,m5);
+                idx_fys++;
+                schedule[idx_fys] = new day_schedule(m1, m2, m3, m4, m5);
+                idx_fys++;
+                schedule[idx_fys] = new day_schedule(m1, m2, m3, m4, m5);
+                idx_fys++;
+
+                for (int i = 0; i < 10; i++)
                 {
-                    home_match[i, j] = 2;
-                    away_match[i, j] = 2;
-                }
-                else
-                {
-                    home_match[i, j] = 0;
-                    away_match[i, j] = 0;
+                    fys[i] = (fys[i] + 1) % 10;
                 }
             }
         }
 
-        for(int i = 0; i < 54; i++)
+        fys = Shuffle_Fisher_Yates(10); //2연전이 1회 생성되고,
+        for (int k = 0; k < 9; k++)
         {
-            int[,] set_of_schedule = new int[10,9];// i : 각 팀의 등수, j : 각 팀의 스케쥴
-            int[] sequence_make_schedule = new int[10]{ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10}; //스케쥴을 결정 할 순서를 정한다.
+            m1 = new match(fys[0], fys[9]);
+            m2 = new match(fys[1], fys[8]);
+            m3 = new match(fys[2], fys[7]);
+            m4 = new match(fys[3], fys[6]);
+            m5 = new match(fys[4], fys[5]);
+            schedule[idx_fys] = new day_schedule(m1, m2, m3, m4, m5);
+            idx_fys++;
+            schedule[idx_fys] = new day_schedule(m1, m2, m3, m4, m5);
+            idx_fys++;
 
+            for (int i = 0; i < 10; i++)
+            {
+                fys[i] = (fys[i] + 1) % 10;
+            }
         }
+
+        fys = Shuffle_Fisher_Yates(5); //개막 2연전에 잡힌 매치를 제외하고 돌려야하므로
+        for(int i = 4; i >= 0; i--)
+        {
+            fys.Add(fys[i] + 5);
+        }
+        for(int i = 0; i< 10; i++) //이미 한 매치업이니까 한 틱 돌리고
+        {
+            fys[i] = (fys[i] + 1) % 10;
+        }
+        for (int k = 0; k < 8; k++)
+        {
+            m1 = new match(fys[0], fys[9]);
+            m2 = new match(fys[1], fys[8]);
+            m3 = new match(fys[2], fys[7]);
+            m4 = new match(fys[3], fys[6]);
+            m5 = new match(fys[4], fys[5]);
+            schedule[idx_fys] = new day_schedule(m1, m2, m3, m4, m5);
+            idx_fys++;
+            schedule[idx_fys] = new day_schedule(m1, m2, m3, m4, m5);
+            idx_fys++;
+
+            for (int i = 0; i < 10; i++)
+            {
+                fys[i] = (fys[i] + 1) % 10;
+            }
+        }
+    }
+    
+    public List<int> Shuffle_Fisher_Yates(int num)
+    {
+        List<int> result = new List<int>();
+        for(int i =1; i <= num; i++)
+        {
+            result.Add(i);
+        }
+
+        int n = result.Count;
+        while(n > 1)
+        {
+            n--;
+            int k = UnityEngine.Random.Range(0, n);
+            int val = result[k];
+            result[k] = result[n];
+            result[n] = val;
+        }
+        return result;
     }
 }

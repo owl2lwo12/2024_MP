@@ -1,5 +1,7 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -17,7 +19,43 @@ using UnityEngine;
 public class MainSystem : MonoBehaviour
 {
     public GameObject[] teams;
-
+    public GameObject sched;
+    public int[] currmatch = new int[10];
+    [SerializeField]
+    private int match_num = 0;
+    private day_schedule d;
+    private void Start()
+    {
+        sched = GameObject.Find("Scheduler");
+        new_season();
+        d = sched.GetComponent<ScheduleMaker>().getSched(match_num);
+        int j = 0;
+        for(int i = 0; i< 5; i++)
+        {
+            currmatch[j] = d.getMatch(i).getHome();
+            j++;
+            currmatch[j] = d.getMatch(i).getAway();
+            j++;
+        }
+    }
+    public void new_season()
+    {
+        match_num = 0;
+        sched.GetComponent<ScheduleMaker>().MakeSchedule();
+    }
+    
+    private void Update()
+    {
+        d = sched.GetComponent<ScheduleMaker>().getSched(match_num);
+        int j = 0;
+        for (int i = 0; i < 5; i++)
+        {
+            currmatch[j] = d.getMatch(i).getHome();
+            j++;
+            currmatch[j] = d.getMatch(i).getAway();
+            j++;
+        }
+    }
     public void Draft()
     {
         //신인 드래프트 -> 새로운선수 110명을 등수 역순으로 각 11명씩 선정한다.
