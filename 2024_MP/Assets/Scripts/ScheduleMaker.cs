@@ -127,11 +127,22 @@ public class ScheduleMaker : MonoBehaviour
             fys = Shuffle_Fisher_Yates(10);
             for(int k =0; k < 9; k++)
             {
-                m1 = new match(fys[0]-1, fys[9]-1);
-                m2 = new match(fys[1]-1, fys[8]-1);
-                m3 = new match(fys[2]-1, fys[7]-1);
-                m4 = new match(fys[3]-1, fys[6]-1);
-                m5 = new match(fys[4]-1, fys[5]-1);
+                if (k == 0)
+                {
+                    m1 = new match(fys[0] - 1, fys[9] - 1);
+                    m2 = new match(fys[1] - 1, fys[8] - 1);
+                    m3 = new match(fys[2] - 1, fys[7] - 1);
+                    m4 = new match(fys[3] - 1, fys[6] - 1);
+                    m5 = new match(fys[4] - 1, fys[5] - 1);
+                }
+                else
+                {
+                    m1 = new match(fys[0], fys[9]);
+                    m2 = new match(fys[1], fys[8]);
+                    m3 = new match(fys[2], fys[7]);
+                    m4 = new match(fys[3], fys[6]);
+                    m5 = new match(fys[4], fys[5]);
+                }
                 schedule[idx_fys] = new day_schedule(m1,m2,m3,m4,m5);
                 idx_fys++;
                 schedule[idx_fys] = new day_schedule(m1, m2, m3, m4, m5);
@@ -149,11 +160,22 @@ public class ScheduleMaker : MonoBehaviour
         fys = Shuffle_Fisher_Yates(10); //2연전이 1회 생성되고,
         for (int k = 0; k < 9; k++)
         {
-            m1 = new match(fys[0], fys[9]);
-            m2 = new match(fys[1], fys[8]);
-            m3 = new match(fys[2], fys[7]);
-            m4 = new match(fys[3], fys[6]);
-            m5 = new match(fys[4], fys[5]);
+            if (k == 0)
+            {
+                m1 = new match(fys[0] - 1, fys[9] - 1);
+                m2 = new match(fys[1] - 1, fys[8] - 1);
+                m3 = new match(fys[2] - 1, fys[7] - 1);
+                m4 = new match(fys[3] - 1, fys[6] - 1);
+                m5 = new match(fys[4] - 1, fys[5] - 1);
+            }
+            else
+            {
+                m1 = new match(fys[0], fys[9]);
+                m2 = new match(fys[1], fys[8]);
+                m3 = new match(fys[2], fys[7]);
+                m4 = new match(fys[3], fys[6]);
+                m5 = new match(fys[4], fys[5]);
+            }
             schedule[idx_fys] = new day_schedule(m1, m2, m3, m4, m5);
             idx_fys++;
             schedule[idx_fys] = new day_schedule(m1, m2, m3, m4, m5);
@@ -176,11 +198,22 @@ public class ScheduleMaker : MonoBehaviour
         }
         for (int k = 0; k < 8; k++)
         {
-            m1 = new match(fys[0], fys[9]);
-            m2 = new match(fys[1], fys[8]);
-            m3 = new match(fys[2], fys[7]);
-            m4 = new match(fys[3], fys[6]);
-            m5 = new match(fys[4], fys[5]);
+            if (k == 0)
+            {
+                m1 = new match(fys[0] - 1, fys[9] - 1);
+                m2 = new match(fys[1] - 1, fys[8] - 1);
+                m3 = new match(fys[2] - 1, fys[7] - 1);
+                m4 = new match(fys[3] - 1, fys[6] - 1);
+                m5 = new match(fys[4] - 1, fys[5] - 1);
+            }
+            else
+            {
+                m1 = new match(fys[0], fys[9]);
+                m2 = new match(fys[1], fys[8]);
+                m3 = new match(fys[2], fys[7]);
+                m4 = new match(fys[3], fys[6]);
+                m5 = new match(fys[4], fys[5]);
+            }
             schedule[idx_fys] = new day_schedule(m1, m2, m3, m4, m5);
             idx_fys++;
             schedule[idx_fys] = new day_schedule(m1, m2, m3, m4, m5);
