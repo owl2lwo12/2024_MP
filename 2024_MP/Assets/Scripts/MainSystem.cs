@@ -24,6 +24,7 @@ public class MainSystem : MonoBehaviour
     [SerializeField]
     private int match_num = 0;
     private day_schedule d;
+    private int playersTeam = 0;
     private void Start()
     {
         sched = GameObject.Find("Scheduler");
@@ -32,9 +33,9 @@ public class MainSystem : MonoBehaviour
         int j = 0;
         for(int i = 0; i< 5; i++)
         {
-            currmatch[j] = d.getMatch(i).getHome();
+            currmatch[j] = d.getMatch(i,playersTeam).getHome();
             j++;
-            currmatch[j] = d.getMatch(i).getAway();
+            currmatch[j] = d.getMatch(i,playersTeam).getAway();
             j++;
         }
     }
@@ -50,9 +51,9 @@ public class MainSystem : MonoBehaviour
         int j = 0;
         for (int i = 0; i < 5; i++)
         {
-            currmatch[j] = d.getMatch(i).getHome();
+            currmatch[j] = d.getMatch(i, playersTeam).getHome();
             j++;
-            currmatch[j] = d.getMatch(i).getAway();
+            currmatch[j] = d.getMatch(i, playersTeam).getAway();
             j++;
         }
     }

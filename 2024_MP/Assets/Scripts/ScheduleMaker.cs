@@ -26,9 +26,25 @@ public struct match
 public struct day_schedule
 {
     match[] matches;
-    public match getMatch(int idx)
+    public match getMatch(int idx, int p_idx)//idx: 몇번째 경기 리스트를 가져올 지, p_idx: player의 팀을 가져온다
     {
+        find_players_team(p_idx);
         return matches[idx];
+    }
+
+    public void find_players_team(int idx) //내 팀(player 소속의 팀)의 match를 가장 위로 올린다. 팀은 idx로 가져올 것
+    {
+        match tmp;
+        for(int i = 0; i < 5; i++)
+        {
+            if (matches[i].getHome() == idx || matches[i].getAway() == idx)
+            {
+                tmp = matches[i];
+                matches[i] = matches[0];
+                matches[0] = tmp;
+                break;
+            }
+        }
     }
     public day_schedule(match a,match b,match c, match d, match e)
     {
@@ -81,11 +97,11 @@ public class ScheduleMaker : MonoBehaviour
     }
     public void MakeSchedule()
     {
-        match m1 = new match(1, 6);
-        match m2 = new match(2, 7);
-        match m3 = new match(3, 8);
-        match m4 = new match(4, 9);
-        match m5 = new match(5, 10);
+        match m1 = new match(0, 5);
+        match m2 = new match(1, 6);
+        match m3 = new match(2, 7);
+        match m4 = new match(3, 8);
+        match m5 = new match(4, 9);
         // 첫 두 경기는 등수대로 진행된다.
         schedule[0] = new day_schedule(m1, m2, m3, m4, m5);
         schedule[1] = new day_schedule(m1, m2, m3, m4, m5);
@@ -96,11 +112,11 @@ public class ScheduleMaker : MonoBehaviour
             fys = Shuffle_Fisher_Yates(10);
             for(int k =0; k < 9; k++)
             {
-                m1 = new match(fys[0], fys[9]);
-                m2 = new match(fys[1], fys[8]);
-                m3 = new match(fys[2], fys[7]);
-                m4 = new match(fys[3], fys[6]);
-                m5 = new match(fys[4], fys[5]);
+                m1 = new match(fys[0]-1, fys[9]-1);
+                m2 = new match(fys[1]-1, fys[8]-1);
+                m3 = new match(fys[2]-1, fys[7]-1);
+                m4 = new match(fys[3]-1, fys[6]-1);
+                m5 = new match(fys[4]-1, fys[5]-1);
                 schedule[idx_fys] = new day_schedule(m1,m2,m3,m4,m5);
                 idx_fys++;
                 schedule[idx_fys] = new day_schedule(m1, m2, m3, m4, m5);
