@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -8,13 +9,19 @@ namespace UI.Season
     public class PlayPanelManager : MonoBehaviour
     {
         public TMP_Text progressText; // 경기 수 표시 텍스트
-
         public List<GameObject> TeamIcons = new List<GameObject>();
-
+        public int[] curMatch = new int[10];
+        
         void Start()
         {
             // 초기 설정
             Init();
+        }
+
+        private void Update()
+        {
+            curMatch = MainSystem._instance.currmatch;
+            SetMatchIcons();
         }
 
         void Init()
@@ -39,11 +46,14 @@ namespace UI.Season
         {
             for(int i = 0; i < TeamIcons.Count; i++)
             {
+                // i 번째 순서의 팀
+                int numOfTeam = curMatch[i];
+                
                 // 현재 UI 내 이미지 불러오기
                 Image curSprite = TeamIcons[i].GetComponent<Image>();
                 
-                // 바꿀 스프라이트 불러오기
-                Sprite changeSprite = UIManager.Instance.TeamSprites[i];
+                // 바꿀 스프라이트 UIManger에서 팀 정보 불러오기
+                Sprite changeSprite = UIManager.Instance.TeamSprites[numOfTeam];
                 
                 // 스프라이트 변경 및 본래 사이즈로 설정
                 curSprite.sprite = changeSprite;
@@ -58,6 +68,7 @@ namespace UI.Season
             
             // UIManager에 OnStartMatch 실행
             UIManager.Instance.OnStartMatch();
+            MainSystem._instance.IncreaseMatchNum();
         }
         
         

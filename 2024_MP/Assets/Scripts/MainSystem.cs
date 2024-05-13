@@ -74,6 +74,12 @@ public class MainSystem : MonoBehaviour
             j++;
         }
     }
+
+    public void IncreaseMatchNum()
+    {
+        match_num++;
+    }
+    
     public void Draft()
     {
         //신인 드래프트 -> 새로운선수 110명을 등수 역순으로 각 11명씩 선정한다.
