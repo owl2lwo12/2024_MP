@@ -2,15 +2,22 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI.Season
 {
     public class PlayPanelManager : MonoBehaviour
     {
+        [Header("UI")]
         public TMP_Text progressText; // 경기 수 표시 텍스트
-        public List<GameObject> TeamIcons = new List<GameObject>();
-        public int[] curMatch = new int[10];
+        public GameObject playingPanel;
+        
+        [Header("팀 아이콘")]
+        public List<GameObject> teamIcons = new List<GameObject>();
+        
+        private int[] _curMatch = new int[10];
+        
         
         void Start()
         {
@@ -20,8 +27,8 @@ namespace UI.Season
 
         private void Update()
         {
-            curMatch = MainSystem._instance.currmatch;
-            SetMatchIcons();
+            _curMatch = MainSystem._instance.currmatch;
+            
         }
 
         void Init()
@@ -29,8 +36,11 @@ namespace UI.Season
             // 현재 경기 수 초기화
             SetProgressText();
             
-            // 매칭 설정
-            SetMatchIcons();
+            // 매칭 아이콘 설정
+            Invoke("SetMatchIcons", 0.5f);
+            
+            // 매치 결과 패널 비활성화
+            playingPanel.SetActive(false);
         }
         
         // 현재 경기 수를 설정 함수
@@ -44,13 +54,16 @@ namespace UI.Season
         // 매치 아이콘 설정 함수
         public void SetMatchIcons()
         {
-            for(int i = 0; i < TeamIcons.Count; i++)
+            Debug.Log("아이콘 설정");
+            
+            for(int i = 0; i < _curMatch.Length; i++)
             {
                 // i 번째 순서의 팀
-                int numOfTeam = curMatch[i];
+                int numOfTeam = _curMatch[i];
+                Debug.Log(numOfTeam);
                 
                 // 현재 UI 내 이미지 불러오기
-                Image curSprite = TeamIcons[i].GetComponent<Image>();
+                Image curSprite = teamIcons[i].GetComponent<Image>();
                 
                 // 바꿀 스프라이트 UIManger에서 팀 정보 불러오기
                 Sprite changeSprite = UIManager.Instance.TeamSprites[numOfTeam];
@@ -64,13 +77,29 @@ namespace UI.Season
         // 경기 시작 함수
         public void PlayMatch()
         {
-            Debug.Log("경기 시작");
+            // 매치 진행 중인 패널 표시
+            playingPanel.SetActive(true);
             
             // UIManager에 OnStartMatch 실행
             UIManager.Instance.OnStartMatch();
-            MainSystem._instance.IncreaseMatchNum();
+            
         }
-        
-        
+
+        // 매치 패널에서 '경기 종료' 버튼 클릭 시
+        public void OnMatchOver()
+        {
+            // 매치 결과 패널 비활성화
+            playingPanel.SetActive(false);
+            
+            // 매치 넘버 증가
+            MainSystem._instance.IncreaseMatchNum();
+            UIManager.Instance.curMatch++;
+            
+            // 아이콘 재설정
+            SetMatchIcons();
+            
+            // 텍스트 수정
+            SetProgressText();
+        }
     }
 }

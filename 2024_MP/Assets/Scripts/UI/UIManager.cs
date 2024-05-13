@@ -72,7 +72,6 @@ public class UIManager : MonoBehaviour
     {
         if (curMatch < maxMatch) // 시즌이 종료되지 않았을 시
         {
-            curMatch++;
             onStartMatch.Invoke();
         }
         else
