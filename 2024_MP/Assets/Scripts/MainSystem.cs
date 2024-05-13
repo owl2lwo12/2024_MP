@@ -1,3 +1,4 @@
+using System;
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ using UnityEngine;
 
 public class MainSystem : MonoBehaviour
 {
+    public static MainSystem _instance = null;
+    
     public GameObject[] teams;
     public GameObject sched;
     public int[] currmatch = new int[10];
@@ -25,6 +28,20 @@ public class MainSystem : MonoBehaviour
     private int match_num = 0;
     private day_schedule d;
     private int playersTeam = 0;
+
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(_instance.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     private void Start()
     {
         sched = GameObject.Find("Scheduler");

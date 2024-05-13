@@ -89,7 +89,22 @@ public struct day_schedule
 /// </summary>
 public class ScheduleMaker : MonoBehaviour
 {
+    public static ScheduleMaker _instance = null;
+    
     private day_schedule[] schedule = new day_schedule[144];
+
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(_instance.gameObject);
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
 
     public day_schedule getSched(int idx)
     {
