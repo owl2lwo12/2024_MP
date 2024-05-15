@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using System.Collections;
@@ -8,9 +9,17 @@ namespace UI.Player
 {
     public class PlayerStatusLeftSideManager : MonoBehaviour
     {
+        public static PlayerStatusLeftSideManager Instance = null;
+        
         [Header("Status")]
-        public TMP_Dropdown Dropdown;
+        public TMP_Dropdown dropdown;
+        
+        [Header("선수 정보")]
         public TMP_Text playerName;
+        public TMP_Text playerAge;
+        public TMP_Text playerHeight;
+        public TMP_Text playerWeight;
+        
         
         [Header("선수 리스트")]
         public List<Human> playerList = new List<Human>();
@@ -21,31 +30,49 @@ namespace UI.Player
             Init();
         }
 
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(Instance.gameObject);
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
+        }
+
         // 초기화 함수
         void Init()
         {
             // 선수 리스트 초기화
-            List<TMP_Dropdown.OptionData> playerList = new List<TMP_Dropdown.OptionData>();
+            List<TMP_Dropdown.OptionData> _playerList = new List<TMP_Dropdown.OptionData>();
             
             // TODO : 선수 리스트 데이터 받아오기
-            playerList.Add(new TMP_Dropdown.OptionData("이장현"));
-            playerList.Add(new TMP_Dropdown.OptionData("심기호"));
+            _playerList.Add(new TMP_Dropdown.OptionData("이장현"));
+            _playerList.Add(new TMP_Dropdown.OptionData("심기호"));
         
             // 위에서 생성한 optionList를 _dropdown의 옵션 값에 추가
-            Dropdown.AddOptions(playerList);
+            dropdown.AddOptions(_playerList);
         
             // 현재 _dropdown 값을 첫 번째 값으로 설정
-            Dropdown.RefreshShownValue();
-            Dropdown.value = 0;
+            dropdown.RefreshShownValue();
+            dropdown.value = 0;
             
             // 이름 설정
-            SettingPlayerName();
+            OnChangedPlayer();
         }
 
-        // 현재 드롭다운의 값으로 이름 설정
-        public void SettingPlayerName()
+        // Dropdown에서 선택한 플레이어가 변경됐을 때 실행시킬 함수
+        public void OnChangedPlayer()
         {
-            playerName.text = Dropdown.options[Dropdown.value].text;
+            // 현재 선택된 플레이어 이름으로 변경
+            string newPlayerName = dropdown.options[dropdown.value].text;
+            playerName.text = newPlayerName;
+            
+            // TODO : 나이/키/몸무게 설정하기
+            
         }
     }
 }

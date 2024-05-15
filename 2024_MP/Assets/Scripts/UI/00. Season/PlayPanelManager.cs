@@ -60,7 +60,6 @@ namespace UI.Season
             {
                 // i 번째 순서의 팀
                 int numOfTeam = _curMatch[i];
-                Debug.Log(numOfTeam);
                 
                 // 현재 UI 내 이미지 불러오기
                 Image curSprite = teamIcons[i].GetComponent<Image>();
