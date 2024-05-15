@@ -47,14 +47,14 @@ namespace UI.Player
         void Init()
         {
             // 선수 리스트 초기화
-            List<TMP_Dropdown.OptionData> _playerList = new List<TMP_Dropdown.OptionData>();
+            List<TMP_Dropdown.OptionData> optionData = new List<TMP_Dropdown.OptionData>();
             
             // TODO : 선수 리스트 데이터 받아오기
-            _playerList.Add(new TMP_Dropdown.OptionData("이장현"));
-            _playerList.Add(new TMP_Dropdown.OptionData("심기호"));
+            optionData.Add(new TMP_Dropdown.OptionData("이장현"));
+            optionData.Add(new TMP_Dropdown.OptionData("심기호"));
         
             // 위에서 생성한 optionList를 _dropdown의 옵션 값에 추가
-            dropdown.AddOptions(_playerList);
+            dropdown.AddOptions(optionData);
         
             // 현재 _dropdown 값을 첫 번째 값으로 설정
             dropdown.RefreshShownValue();
@@ -72,7 +72,9 @@ namespace UI.Player
             playerName.text = newPlayerName;
             
             // TODO : 나이/키/몸무게 설정하기
-            
+            /*
+             
+             */
         }
     }
 }
