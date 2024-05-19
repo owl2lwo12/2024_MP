@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UI._01._Player;
 using UnityEngine.Serialization;
 
 namespace UI.Player
@@ -22,7 +23,7 @@ namespace UI.Player
         
         
         [Header("선수 리스트")]
-        public List<Human> playerList = new List<Human>();
+        public List<Batter_Stats> playerList = new List<Batter_Stats>();
         
         // Start is called before the first frame update
         void Start()
@@ -67,14 +68,23 @@ namespace UI.Player
         // Dropdown에서 선택한 플레이어가 변경됐을 때 실행시킬 함수
         public void OnChangedPlayer()
         {
+            Batter_Stats player = new Batter_Stats();
+            
             // 현재 선택된 플레이어 이름으로 변경
             string newPlayerName = dropdown.options[dropdown.value].text;
             playerName.text = newPlayerName;
             
-            // TODO : 나이/키/몸무게 설정하기
-            /*
+            // 나이/키/몸무게 설정하기
+            playerAge.text = player.getage().ToString();
+            playerHeight.text = player.getheight().ToString();
+            playerWeight.text = player.getweight().ToString();
              
-             */
+            
+            // 스탯 변경
+            // 툴 변경
+            PlayerStatusCenterSideManager.Instance.SetPlayerToolUI(player);
+            // 스킬 변경
+            PlayerStatusCenterSideManager.Instance.SetPlayerSkillUI(player);
         }
     }
 }
