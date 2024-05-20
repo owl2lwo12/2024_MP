@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -16,6 +17,12 @@ namespace UI._01._Player
         public Slider contactSlider;
         public Slider eyeSlider;
         public Slider intelligenceSlider;
+        public TMP_Text powerText;
+        public TMP_Text speedText;
+        public TMP_Text defText;
+        public TMP_Text contactText;
+        public TMP_Text eyeText;
+        public TMP_Text intelligenceText;
 
         [Header("스킬")] 
         public Slider zoneSlider;
@@ -61,35 +68,47 @@ namespace UI._01._Player
             slider.maxValue = _maxStatus;
         }
 
-        // 툴 UI 세팅
+        /// <summary>
+        /// 플레이어의 Tool UI를 설정해주는 함수
+        /// </summary>
+        /// <param name="player">해당 플레이어 파라미터</param>
         public void SetPlayerToolUI(Batter_Stats player)
         {
             // 힘
             int pow = player.getpower();
             powerSlider.value = pow;
+            powerText.text = $"{pow}/{_maxStatus}";
             
             // 속도
             int speed = player.getspeed();
             speedSlider.value = speed;
+            speedText.text = $"{speed}/{_maxStatus}";
             
             // 방어
             int def = player.getdefense();
-            speedSlider.value = def;
+            defSlider.value = def;
+            defText.text = $"{def}/{_maxStatus}";
             
             // 컨택
             int con = player.getcontact();
-            speedSlider.value = con;
+            contactSlider.value = con;
+            contactText.text = $"{con}/{_maxStatus}";
             
             // 선구안
             int eye = player.geteye();
-            speedSlider.value = eye;
+            eyeSlider.value = eye;
+            eyeText.text = $"{eye}/{_maxStatus}";
             
             // 지능
             int intel = player.getintelligence();
-            speedSlider.value = intel;
+            intelligenceSlider.value = intel;
+            intelligenceText.text = $"{intel}/{_maxStatus}";
         }
 
-        // 
+        /// <summary>
+        /// 플레이어의 Skill UI를 설정해주는 함수
+        /// </summary>
+        /// <param name="player">해당 플레이어 파라미터</param>
         public void SetPlayerSkillUI(Batter_Stats player)
         {
             
