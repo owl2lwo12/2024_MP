@@ -242,6 +242,8 @@ public class Batter_Stats : Human
         tot -= getage();
         if (getage() > 35) tot += getage() * 3;
 
+        if (getinjurytype() != injury.fine) tot = -tot;
+
         return tot;
     }
 

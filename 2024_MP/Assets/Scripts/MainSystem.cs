@@ -80,6 +80,38 @@ public class MainSystem : MonoBehaviour
         match_num++;
     }
     
+    public void Make_Match_Result()
+    {
+        if (match_num % 20 == 0)
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                teams[i].GetComponent<Team_Scripts>().Sorting_Players();
+                teams[i].GetComponent<Team_Scripts>().LineUp();
+            }
+        } //20경기에 한번 정도는 투수진 정비해도 되지 않을 까?
+        else
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                teams[i].GetComponent<Team_Scripts>().Sorting_Player_Batters();
+                teams[i].GetComponent<Team_Scripts>().LineUp();
+            }
+        }
+        d = sched.GetComponent<ScheduleMaker>().getSched(match_num);
+        for(int i = 0; i < 5; i++) //각 경기를 수행(총 5경기)
+        {
+            int home = d.getMatch(i, playersTeam).getHome();
+            int away = d.getMatch(i, playersTeam).getAway();
+
+            Make_Each_Match_Result(home,away);
+        }
+    }
+    public void Make_Each_Match_Result(int i,int j) //index 2개(각 팀의 index)를 받아와서 두 팀의 라인업을 비교후에 
+    {
+        
+    }
+
     public void Draft()
     {
         //신인 드래프트 -> 새로운선수 110명을 등수 역순으로 각 11명씩 선정한다.

@@ -45,7 +45,7 @@ public class Human : MonoBehaviour
         else age = 20; //고졸 draft
     }
 
-    public bool Retirement() //선수 은퇴 ---> 데이터 형이니까 삭제?
+    public bool Retirement() //선수 은퇴 ---> 데이터 형이니까 삭제? 잘 모름
     {
         bool iretire = false;
         if(injured == injury.dead) {

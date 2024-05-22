@@ -66,7 +66,7 @@ public class Pitcher_Stats : Human
         int tot = 0;
         tot += control + speed;
         if (tot > 170) tot *= 3; //불펜투수라서 버려지는 것을 방지
-        if(stamina > 60) //선발투수 가점
+        if(stamina > 80) //선발투수 가점
         {
             tot += stamina * 2;
         }
@@ -75,6 +75,8 @@ public class Pitcher_Stats : Human
             tot += stamina;
         }
         tot -= getage(); //비슷하면 나이 많은 사람이 짤리도록
+
+        if (getinjurytype() != injury.fine) tot = -tot;
 
         return tot;
     } //총 stat 확인용
