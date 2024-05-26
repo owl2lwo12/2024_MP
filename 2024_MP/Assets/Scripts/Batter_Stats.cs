@@ -300,10 +300,11 @@ public class Batter_Stats : Human
 
     public void After_Match() //일정 경기가 끝날 때 마다 랜덤한 수치적 상승, 훈련 조건도 추후 추가할 것
     {
+        //Debug.Log("stats change");
         float p;
         if (getage() <= getgage())
         {
-            p = Random.Range(0, 1);
+            p = Random.Range(0f, 1f);
             int _r = Random.Range(0, 10);
             if (power < p_power)
             {

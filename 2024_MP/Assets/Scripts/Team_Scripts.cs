@@ -326,7 +326,6 @@ public class Team_Scripts : MonoBehaviour
     }
 
     public GameObject get_start_pitcher(int i) {
-        Debug.Log(i);
         return line_up_pitchers_start[i]; }
     public List<GameObject> get_sub_pitcher() { return line_up_pitchers_sub; }
     public List<GameObject> get_batters() { return line_up_batters_start; }
