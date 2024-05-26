@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace UI.Season
 {
-    public class PlayPanelManager : MonoBehaviour
+    public class PlayPanelManager : Singleton<PlayPanelManager>
     {
         [Header("UI")]
         public TMP_Text progressText; // 경기 수 표시 텍스트
@@ -18,7 +18,11 @@ namespace UI.Season
 
         [Header("경기 진행")] 
         public Image leftImage;
-        public Image rightImage; 
+        public Image rightImage;
+        public TMP_Text leftScore;
+        public TMP_Text rightScore;
+        public TMP_Text winOrLose;
+        
         
         private int[] _curMatch = new int[10];
         
@@ -108,6 +112,13 @@ namespace UI.Season
             
             // 텍스트 수정
             SetProgressText();
+        }
+
+        public void SettingMatchResultUI(int newleftScore, int newRightScore, string newWinOrLose)
+        {
+            leftScore.text = $"{newleftScore}";
+            rightScore.text = $"{newRightScore}";
+            winOrLose.text = $"{newWinOrLose}";
         }
     }
 }
