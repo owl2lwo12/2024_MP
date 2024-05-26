@@ -77,11 +77,16 @@ public class Batter_Stats : Human
     private int right_dir = 0;//우측 타구
 
     //details
+    [SerializeField]
     private int training_style = 0; // 100일수록 웨이트 트레이닝 위주(0~10)
+    [SerializeField]
     private int batting_theory = 0; // 100일수록 뜬공 지향(0~10)
+    [SerializeField]
     private int batting_position = 0; //100일수록 로테이셔널 히팅에 가깝게(0~10)
 
+    [SerializeField]
     private int batting_positive = 0; //100에 가까울수록 적극적인 스윙(0~10)
+    [SerializeField]
     private int zone_size = 0;//100에 가까울수록 존의 크기를 크게 잡는다.(0~10)
 
     //getset records
@@ -299,10 +304,10 @@ public class Batter_Stats : Human
         if (getage() <= getgage())
         {
             p = Random.Range(0, 1);
+            int _r = Random.Range(0, 10);
             if (power < p_power)
             {
-                if (p > 0.9f) power++;
-                int _r = Random.Range(0, 10);
+                if (p > 0.9f) power++;                
                 if (_r < training_style) power++;
             }
             else
@@ -310,16 +315,21 @@ public class Batter_Stats : Human
                 if (p > 0.995f) power++;
                 if (p > 0.999f)
                 {
-                    int _r;
+                    if (_r < training_style) p_power++;
                 }
             }
             if (speed < p_speed)
             {
                 if (p > 0.9f) speed++;
+                if (_r < training_style) speed++;
             }
             else
             {
                 if (p > 0.995f) speed++;
+                if(p > 0.999f)
+                {
+                    if (_r < training_style) p_speed++;
+                }
             }
             if (contact < p_contact)
             {
