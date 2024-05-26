@@ -55,14 +55,28 @@ public class Team_Scripts : MonoBehaviour
     private List<GameObject> line_up_pitchers_start; //경기에 뛸 투수 라인업
     private List<GameObject> line_up_pitchers_sub; //경기에 뛸 중계 투수 라인업
 
+    public List<GameObject> Batterrplayerlist { get => batterrplayerlist; set => batterrplayerlist = value; }
+    public List<GameObject> Pitcherplayerlist { get => pitcherplayerlist; set => pitcherplayerlist = value; }
+
+    public GameObject Change_Pitcher(int score_gap)
+    {
+        if(Mathf.Abs(score_gap) <= 3)
+        {
+            return line_up_batters_sub[Random.Range(0, 3)];
+        }
+        else
+        {
+            return line_up_batters_sub[Random.Range(3,7)];
+        }
+    }
     public void Sorting_Players() //매 경기 sort하면 게임 로딩이 너무 길어질 것 같아서 일단 분리해놓음
     {
-        batterrplayerlist.Sort(new Compare_Stats_B());
-        pitcherplayerlist.Sort(new Compare_Stat_P());
+        Batterrplayerlist.Sort(new Compare_Stats_B());
+        Pitcherplayerlist.Sort(new Compare_Stat_P());
     }
     public void Sorting_Player_Batters() // 또 투수는 너무 자주 바꾸면 이상해 질 수 있으므로 타자만 바꿀 수 있도록
     {
-        batterrplayerlist.Sort(new Compare_Stats_B());
+        Batterrplayerlist.Sort(new Compare_Stats_B());
     }
     public void LineUp()
     {
@@ -72,7 +86,7 @@ public class Team_Scripts : MonoBehaviour
         // 6,7,8,9는 각각 6 -> 9 -> 7 -> 8 순서로 오버롤 높은 선수를 배치한다. ---- 이거 아님
         // 먼저 오버롤 순서대로 포지션 비었으면 채우고,
         bool[] cur_pos = new bool[8];
-        foreach (var player in batterrplayerlist)
+        foreach (var player in Batterrplayerlist)
         {
             switch (player.GetComponent<Batter_Stats>().getmaindefposition())
             {
@@ -241,7 +255,7 @@ public class Team_Scripts : MonoBehaviour
 
         // 투수는 체력(stamina)일정 이상의 선수를 선발로 분류해서 가치가 높은 선수부터 5명 선정
         // 나머지 투수는 stamina 제외 능력치를 분석해서 가치가 높은 순서대로 배정.
-        foreach (var player in pitcherplayerlist)
+        foreach (var player in Pitcherplayerlist)
         {
             if (player.GetComponent<Pitcher_Stats>().getstamina() >= 80 && line_up_pitchers_start.Count < 5)
             {//5선발 + Stamina 고려해서 이렇게
@@ -256,11 +270,11 @@ public class Team_Scripts : MonoBehaviour
     public void Waiver() // 가치가 없다고 평가되는 선수 해고. 선수는 삭제
     {
         int t = 0;
-        if (batterrplayerlist.Count >= pitcherplayerlist.Count)
+        if (Batterrplayerlist.Count >= Pitcherplayerlist.Count)
         { //일반적으로 투수의 가치가 높으므로 같은 수면 타자를 먼저 짜른다.
-            for (int i = 1; i < batterrplayerlist.Count; i++)
+            for (int i = 1; i < Batterrplayerlist.Count; i++)
             {
-                if (batterrplayerlist[t].GetComponent<Batter_Stats>().getTotal() > batterrplayerlist[i].GetComponent<Batter_Stats>().getTotal())
+                if (Batterrplayerlist[t].GetComponent<Batter_Stats>().getTotal() > Batterrplayerlist[i].GetComponent<Batter_Stats>().getTotal())
                 {
                     t = i;
                 }
@@ -268,9 +282,9 @@ public class Team_Scripts : MonoBehaviour
         }
         else
         {
-            for (int i = 1; i < pitcherplayerlist.Count; i++)
+            for (int i = 1; i < Pitcherplayerlist.Count; i++)
             {
-                if (pitcherplayerlist[t].GetComponent<Pitcher_Stats>().getTotal() > pitcherplayerlist[i].GetComponent<Pitcher_Stats>().getTotal())
+                if (Pitcherplayerlist[t].GetComponent<Pitcher_Stats>().getTotal() > Pitcherplayerlist[i].GetComponent<Pitcher_Stats>().getTotal())
                 {
                     t = i;
                 }
@@ -295,4 +309,16 @@ public class Team_Scripts : MonoBehaviour
     public List<GameObject> get_sub_pitcher() { return line_up_pitchers_sub; }
     public List<GameObject> get_batters() { return line_up_batters_start; }
     public List<GameObject> get_sub_batters() { return line_up_batters_sub; }
+
+    public void StatChange()
+    {
+        foreach(GameObject b in batterrplayerlist)
+        {
+            b.GetComponent<Batter_Stats>().After_Match();
+        }
+        foreach(GameObject p in pitcherplayerlist)
+        {
+            p.GetComponent<Pitcher_Stats>().After_Match();
+        }
+    }
 }

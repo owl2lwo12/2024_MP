@@ -28,7 +28,10 @@ public class MainSystem : MonoBehaviour
     [SerializeField]
     private int match_num = 0;
     private day_schedule d;
+    [SerializeField]
     private int playersTeam = 0;
+    [SerializeField]
+    private int stats_Change = 12;
 
     private void Awake()
     {
@@ -107,7 +110,18 @@ public class MainSystem : MonoBehaviour
 
             Make_Each_Match_Result(home,away);
         }
+        foreach(GameObject t in teams)
+        {
+            foreach(GameObject p in t.GetComponent<Team_Scripts>().Pitcherplayerlist)
+            {
+                p.GetComponent<Pitcher_Stats>().One_Match(); //경기가 끝났으니까 
+            }
+        }
         match_num++;
+        if(match_num%stats_Change == 0)
+        {
+            StatChange();
+        }
     }
     public void Make_Each_Match_Result(int i,int j) //index 2개(각 팀의 index)를 받아와서 두 팀의 라인업을 비교후에 
     {
@@ -1113,6 +1127,19 @@ public class MainSystem : MonoBehaviour
                     else break;
                 }
             }
+
+            if(home_Pitcher.GetComponent<Pitcher_Stats>().CStamina < 10 || 
+                (home_Pitcher.GetComponent<Pitcher_Stats>().getstamina()>=80 && home_Pitcher.GetComponent<Pitcher_Stats>().TodayEra > 4)||
+                (home_Pitcher.GetComponent<Pitcher_Stats>().getstamina()< 80 && home_Pitcher.GetComponent<Pitcher_Stats>().TodayEra > 2))
+            {
+                teams[i].GetComponent<Team_Scripts>().Change_Pitcher(teamScoreHome - teamScoreAway);
+            }
+            if (away_Pitcher.GetComponent<Pitcher_Stats>().CStamina < 10 ||
+                (away_Pitcher.GetComponent<Pitcher_Stats>().getstamina() >= 80 && away_Pitcher.GetComponent<Pitcher_Stats>().TodayEra > 4) ||
+                (away_Pitcher.GetComponent<Pitcher_Stats>().getstamina() < 80 && away_Pitcher.GetComponent<Pitcher_Stats>().TodayEra > 2))
+            {
+                teams[j].GetComponent<Team_Scripts>().Change_Pitcher(teamScoreAway - teamScoreHome);
+            }
         }
 
         if(teamScoreAway > teamScoreHome)
@@ -1132,10 +1159,16 @@ public class MainSystem : MonoBehaviour
         }
     }
 
-
-
     public void Draft()
     {
         //신인 드래프트 -> 새로운선수 110명을 등수 역순으로 각 11명씩 선정한다.
+    }
+
+    public void StatChange()
+    {
+        foreach(GameObject t in teams)
+        {
+            t.GetComponent<Team_Scripts>().StatChange();
+        }
     }
 }

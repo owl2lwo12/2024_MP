@@ -74,6 +74,15 @@ public class Batter_Stats : Human
     private int left_dir = 0;//좌측 타구
     private int center_dir = 0;//중앙 타구
     private int right_dir = 0;//우측 타구
+
+    //details
+    private int training_style = 0; // 100일수록 웨이트 트레이닝 위주(0~100)
+    private int batting_theory = 0; // 100일수록 뜬공 지향(0~100)
+    private int batting_position = 0; //100일수록 로테이셔널 히팅에 가깝게(0~100)
+
+    private int batting_positive = 0; //100에 가까울수록 적극적인 스윙(0~100)
+    private int zone_size = 0;//100에 가까울수록 존의 크기를 크게 잡는다.(0~100)
+
     //getset records
     public int Hit { get => hit; set => hit = value; }
     public int D_hit { get => d_hit; set => d_hit = value; }
@@ -91,7 +100,11 @@ public class Batter_Stats : Human
     public int Left_dir { get => left_dir; set => left_dir = value; }
     public int Center_dir { get => center_dir; set => center_dir = value; }
     public int Right_dir { get => right_dir; set => right_dir = value; }
-
+    public int Training_style { get => training_style; set => training_style = value; }
+    public int Batting_theory { get => batting_theory; set => batting_theory = value; }
+    public int Batting_position { get => batting_position; set => batting_position = value; }
+    public int Batting_positive { get => batting_positive; set => batting_positive = value; }
+    public int Zone_size { get => zone_size; set => zone_size = value; }
 
     // Constructor
     public Batter_Stats()
@@ -101,6 +114,17 @@ public class Batter_Stats : Human
         p_intelligence = Random.Range(20, 101);
         p_eye = Random.Range(20, 101);
         p_contact = Random.Range(20, 101);
+
+        if(p_power > 65)
+        {
+            training_style = Random.Range(50, 101);
+            batting_theory = Random.Range(70, 101);
+        }
+        else
+        {
+            training_style = Random.Range(0, 51);
+            batting_theory = Random.Range(0, 80);
+        }
 
         power = Random.Range(0, p_power);
         speed = Random.Range(0,p_speed);
@@ -212,6 +236,10 @@ public class Batter_Stats : Human
             sub_pos = new List<def_position> { def_position.B1 };
             pos_stats_sub = new List<int> { pos_stats_main * 8 / 10 };
         }
+
+        batting_position = Random.Range(0, 101);
+        batting_positive = Random.Range(0, 101);
+        zone_size = Random.Range(0, 101);
     }
     public void ReuseData()
     {

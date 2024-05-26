@@ -43,6 +43,12 @@ public class Human : MonoBehaviour
 
         if (Random.Range(0, 100) > 90) age = 23; //대졸 draft
         else age = 20; //고졸 draft
+
+
+        height = Random.Range(165, 210);
+        weight = height - 100;
+        weight += Random.Range(5, 30);
+        muscle = Random.Range(20, 40);
     }
 
     public bool Retirement() //선수 은퇴 ---> 데이터 형이니까 삭제? 잘 모름

@@ -24,25 +24,22 @@ public class Pitcher_Stats : Human
     [SerializeField]
     private bool hand = false; // false = right , true = left
 
-    private int training_style = 0; // 100일수록 웨이트 트레이닝 위주(0~100)
-    private int batting_theory = 0; // 100일수록 뜬공 지향(0~100)
-    private int batting_position = 0; //100일수록 로테이셔널 히팅에 가깝게(0~100)
-    private int batting_positive = 0; //100에 가까울수록 적극적인 스윙(0~100)
-    private int zone_size = 0;//100에 가까울수록 존의 크기를 크게 잡는다.
-
-
     //season records
     private int era = 0;//실점
     private int inning = 0;//수행한 이닝 = inning/3  inning%3은 1/3,2/3이닝과 같이 표현)
 
+    private int todayEra = 0;//오늘 실점
+
     public int CStamina { get => cStamina; set => cStamina = value; }
     public int Era { get => era; set => era = value; }
     public int Inning { get => inning; set => inning = value; }
-    public int Training_style { get => training_style; set => training_style = value; }
-    public int Batting_theory { get => batting_theory; set => batting_theory = value; }
-    public int Batting_position { get => batting_position; set => batting_position = value; }
-    public int Batting_positive { get => batting_positive; set => batting_positive = value; }
-    public int Zone_size { get => zone_size; set => zone_size = value; }
+    public int TodayEra { get => todayEra; set => todayEra = value; }
+
+    public void SetEra(int i)
+    {
+        era += i;
+        TodayEra += i;
+    }
 
     // Constructor
     public Pitcher_Stats()
@@ -147,5 +144,6 @@ public class Pitcher_Stats : Human
         {
             CStamina = stamina;
         }
+        TodayEra = 0;
     }
 }
