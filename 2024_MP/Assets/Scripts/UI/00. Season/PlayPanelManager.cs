@@ -12,6 +12,7 @@ namespace UI.Season
         [Header("UI")]
         public TMP_Text progressText; // 경기 수 표시 텍스트
         public GameObject playingPanel;
+        public GameObject matchBtn;
         
         [Header("팀 아이콘")]
         public List<GameObject> teamIcons = new List<GameObject>();
@@ -107,7 +108,16 @@ namespace UI.Season
             
             // 매치 넘버 증가
             MainSystem._instance.IncreaseMatchNum();
-            UIManager.Instance.curMatch++;
+
+            if (UIManager.Instance.curMatch == UIManager.Instance.maxMatch) // 현재 매치가 144면
+            {
+                matchBtn.SetActive(false);
+                Debug.Log("시즌 종료");
+            }
+            else
+            {
+                UIManager.Instance.curMatch++;
+            }
             
             // 텍스트 수정
             SetProgressText();

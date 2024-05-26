@@ -71,7 +71,7 @@ public class UIManager : MonoBehaviour
     // 경기 시작 시 실행
     public void OnStartMatch()
     {
-        if (curMatch < maxMatch) // 시즌이 종료되지 않았을 시
+        if (curMatch < maxMatch + 1) // 시즌이 종료되지 않았을 시
         {
             onStartMatch.Invoke();
         }
