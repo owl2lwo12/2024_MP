@@ -99,7 +99,7 @@ public class Pitcher_Stats : Human
         float p;
         if (getage() <= getgage())
         {
-            p = Random.Range(0, 1);
+            p = Random.Range(0f, 1f);
             if (control < pControl)
             {
                 if (p > 0.9f) control++;
