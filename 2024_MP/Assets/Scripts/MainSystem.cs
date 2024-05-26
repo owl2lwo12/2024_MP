@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
 using UnityEditor;
+using UI.Season;
 
 
 /*
@@ -43,8 +44,11 @@ public class MainSystem : MonoBehaviour
     private int stats_Change = 12;
 
     private int players_Match_Index = 1;
+    [SerializeField]
     private int score_result_home = 0;
+    [SerializeField]
     private int score_result_away = 0;
+    [SerializeField]
     private String matchResult = "??";
 
     public int Players_Match_Index { get => players_Match_Index; set => players_Match_Index = value; }
@@ -118,7 +122,7 @@ public class MainSystem : MonoBehaviour
     }
     public void SetResults()
     {
-        d = sched.GetComponent<ScheduleMaker>().getSched(Match_num - 1);
+        d = sched.GetComponent<ScheduleMaker>().getSched(Match_num);
         int home = d.getMatch(players_Match_Index, playersTeam).getHome();
         int away = d.getMatch(players_Match_Index, playersTeam).getAway();
 
@@ -139,7 +143,7 @@ public class MainSystem : MonoBehaviour
     {
         if (Match_num % 20 == 0)
         {
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < 10; i++)
             {
                 teams[i].GetComponent<Team_Scripts>().Sorting_Players();
                 teams[i].GetComponent<Team_Scripts>().LineUp();
@@ -147,7 +151,7 @@ public class MainSystem : MonoBehaviour
         } //20경기에 한번 정도는 투수진 정비해도 되지 않을 까?
         else
         {
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < 10; i++)
             {
                 teams[i].GetComponent<Team_Scripts>().Sorting_Player_Batters();
                 teams[i].GetComponent<Team_Scripts>().LineUp();
@@ -172,7 +176,7 @@ public class MainSystem : MonoBehaviour
                 p.GetComponent<Pitcher_Stats>().One_Match(); //경기가 끝났으니까 
             }
         }
-        Match_num++;
+        //Match_num++;
         if(Match_num%stats_Change == 0)
         {
             StatChange();
@@ -182,6 +186,8 @@ public class MainSystem : MonoBehaviour
             t.GetComponent<Team_Scripts>().SetWinRate();
         }
         SetResults();
+
+        PlayPanelManager.Instance.SettingMatchResultUI(score_result_home, score_result_away, matchResult);
     }
     public void Make_Each_Match_Result(int i,int j) //index 2개(각 팀의 index)를 받아와서 두 팀의 라인업을 비교후에 
     {

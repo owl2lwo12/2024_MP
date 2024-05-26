@@ -4009,6 +4009,10 @@ MonoBehaviour:
   - {fileID: 1820889161}
   - {fileID: 1676280887}
   - {fileID: 2121908075}
+  line_up_batters_start: []
+  line_up_batters_sub: []
+  line_up_pitchers_start: []
+  line_up_pitchers_sub: []
 --- !u!4 &140400843
 Transform:
   m_ObjectHideFlags: 0
@@ -5810,6 +5814,10 @@ MonoBehaviour:
   - {fileID: 273557680}
   - {fileID: 914604697}
   - {fileID: 120317291}
+  line_up_batters_start: []
+  line_up_batters_sub: []
+  line_up_pitchers_start: []
+  line_up_pitchers_sub: []
 --- !u!4 &199085639
 Transform:
   m_ObjectHideFlags: 0
@@ -6342,6 +6350,10 @@ MonoBehaviour:
   - {fileID: 24760041}
   - {fileID: 1742985338}
   - {fileID: 556020771}
+  line_up_batters_start: []
+  line_up_batters_sub: []
+  line_up_pitchers_start: []
+  line_up_pitchers_sub: []
 --- !u!4 &221311554
 Transform:
   m_ObjectHideFlags: 0
@@ -7040,6 +7052,10 @@ MonoBehaviour:
   - {fileID: 2064380299}
   - {fileID: 306302678}
   - {fileID: 212137666}
+  line_up_batters_start: []
+  line_up_batters_sub: []
+  line_up_pitchers_start: []
+  line_up_pitchers_sub: []
 --- !u!4 &250400993
 Transform:
   m_ObjectHideFlags: 0
@@ -25526,6 +25542,10 @@ MonoBehaviour:
   - {fileID: 1214726633}
   - {fileID: 1065981364}
   - {fileID: 1508889056}
+  line_up_batters_start: []
+  line_up_batters_sub: []
+  line_up_pitchers_start: []
+  line_up_pitchers_sub: []
 --- !u!4 &942813646
 Transform:
   m_ObjectHideFlags: 0
@@ -40879,6 +40899,10 @@ MonoBehaviour:
   - {fileID: 1873162351}
   - {fileID: 519873020}
   - {fileID: 1378901893}
+  line_up_batters_start: []
+  line_up_batters_sub: []
+  line_up_pitchers_start: []
+  line_up_pitchers_sub: []
 --- !u!4 &1485599889
 Transform:
   m_ObjectHideFlags: 0
@@ -45996,6 +46020,10 @@ MonoBehaviour:
   - {fileID: 1671567664}
   - {fileID: 657780997}
   - {fileID: 747013120}
+  line_up_batters_start: []
+  line_up_batters_sub: []
+  line_up_pitchers_start: []
+  line_up_pitchers_sub: []
 --- !u!1 &1654843779
 GameObject:
   m_ObjectHideFlags: 0
@@ -47766,6 +47794,10 @@ MonoBehaviour:
   - {fileID: 303538792}
   - {fileID: 1504165107}
   - {fileID: 1547015949}
+  line_up_batters_start: []
+  line_up_batters_sub: []
+  line_up_pitchers_start: []
+  line_up_pitchers_sub: []
 --- !u!4 &1723901326
 Transform:
   m_ObjectHideFlags: 0
@@ -50328,6 +50360,10 @@ MonoBehaviour:
   - {fileID: 799406593}
   - {fileID: 1793656840}
   - {fileID: 894616874}
+  line_up_batters_start: []
+  line_up_batters_sub: []
+  line_up_pitchers_start: []
+  line_up_pitchers_sub: []
 --- !u!4 &1831683141
 Transform:
   m_ObjectHideFlags: 0
@@ -57692,6 +57728,10 @@ MonoBehaviour:
   - {fileID: 2054542526}
   - {fileID: 125872773}
   - {fileID: 752736845}
+  line_up_batters_start: []
+  line_up_batters_sub: []
+  line_up_pitchers_start: []
+  line_up_pitchers_sub: []
 --- !u!4 &2074419163
 Transform:
   m_ObjectHideFlags: 0
