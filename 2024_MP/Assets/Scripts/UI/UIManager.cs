@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Status")] 
     public List<Sprite> TeamSprites = new List<Sprite>();
+    public List<string> TeamNames = new List<string>();
     
     [Header("Season/Play")] 
     public string descSeasonPlay = "Season Play 변수 모음";
