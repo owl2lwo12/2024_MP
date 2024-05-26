@@ -74,6 +74,23 @@ public class Batter_Stats : Human
     private int left_dir = 0;//좌측 타구
     private int center_dir = 0;//중앙 타구
     private int right_dir = 0;//우측 타구
+    //getset records
+    public int Hit { get => hit; set => hit = value; }
+    public int D_hit { get => d_hit; set => d_hit = value; }
+    public int T_hit { get => t_hit; set => t_hit = value; }
+    public int H_run { get => h_run; set => h_run = value; }
+    public int Steal { get => steal; set => steal = value; }
+    public int Ball4 { get => ball4; set => ball4 = value; }
+    public int Score { get => score; set => score = value; }
+    public int S_out { get => s_out; set => s_out = value; }
+    public int F_out { get => f_out; set => f_out = value; }
+    public int G_out { get => g_out; set => g_out = value; }
+    // getset serial records
+    public int Inner { get => inner; set => inner = value; }
+    public int Outer { get => outer; set => outer = value; }
+    public int Left_dir { get => left_dir; set => left_dir = value; }
+    public int Center_dir { get => center_dir; set => center_dir = value; }
+    public int Right_dir { get => right_dir; set => right_dir = value; }
 
 
     // Constructor

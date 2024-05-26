@@ -26,7 +26,11 @@ public class Pitcher_Stats : Human
 
     //season records
     private int era = 0;//실점
-    private float inning = 0;//수행한 이닝
+    private int inning = 0;//수행한 이닝 = inning/3  inning%3은 1/3,2/3이닝과 같이 표현)
+
+    public int CStamina { get => cStamina; set => cStamina = value; }
+    public int Era { get => era; set => era = value; }
+    public int Inning { get => inning; set => inning = value; }
 
     // Constructor
     public Pitcher_Stats()
@@ -37,7 +41,7 @@ public class Pitcher_Stats : Human
 
         speed = Random.Range(0, pSpeed + 1);
         control = Random.Range(0,pControl + 1);
-        cStamina = stamina;
+        CStamina = stamina;
 
         if (Random.Range(0, 100) > 75) hand = true;
         else hand = false;
@@ -50,7 +54,7 @@ public class Pitcher_Stats : Human
 
         speed = Random.Range(0, pSpeed + 1);
         control = Random.Range(0, pControl + 1);
-        cStamina= stamina;
+        CStamina= stamina;
 
         if (Random.Range(0, 100) > 75) hand = true;
         else hand = false;
@@ -123,13 +127,13 @@ public class Pitcher_Stats : Human
     }
     public void One_Match()
     {
-        if (stamina - cStamina > 20)
+        if (stamina - CStamina > 20)
         {
-            cStamina += 20;
+            CStamina += 20;
         }
-        else if (stamina - cStamina <= 20)
+        else if (stamina - CStamina <= 20)
         {
-            cStamina = stamina;
+            CStamina = stamina;
         }
     }
 }
