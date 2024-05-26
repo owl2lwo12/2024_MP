@@ -1,16 +1,15 @@
 using System;
 using UnityEngine;
 using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 namespace UI._04._Setting
 {
     public class SettingPanel : MonoBehaviour
     {
-        [Header("슬라이더")] 
-        public Slider sfxSlider;
-        public Slider musicSlider;
-        
+        private void Start()
+        {
+        }
+
         public void OnClickExitButton()
         {
 #if UNITY_EDITOR
