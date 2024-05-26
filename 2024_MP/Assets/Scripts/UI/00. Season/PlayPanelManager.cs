@@ -23,7 +23,7 @@ namespace UI.Season
         public TMP_Text rightScore;
         public TMP_Text winOrLose;
         
-        
+        [SerializeField]
         private int[] _curMatch = new int[10];
         
         
@@ -36,6 +36,10 @@ namespace UI.Season
         private void Update()
         {
             _curMatch = MainSystem._instance.currmatch;
+            
+            
+            // 아이콘 재설정
+            SetMatchIcons();
             
         }
 
@@ -106,9 +110,6 @@ namespace UI.Season
             // 매치 넘버 증가
             MainSystem._instance.IncreaseMatchNum();
             UIManager.Instance.curMatch++;
-            
-            // 아이콘 재설정
-            SetMatchIcons();
             
             // 텍스트 수정
             SetProgressText();
