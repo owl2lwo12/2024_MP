@@ -15,6 +15,10 @@ namespace UI.Season
         
         [Header("팀 아이콘")]
         public List<GameObject> teamIcons = new List<GameObject>();
+
+        [Header("경기 진행")] 
+        public Image leftImage;
+        public Image rightImage; 
         
         private int[] _curMatch = new int[10];
         
@@ -71,6 +75,11 @@ namespace UI.Season
                 curSprite.sprite = changeSprite;
                 curSprite.SetNativeSize();
             }
+
+            leftImage.sprite = teamIcons[0].GetComponent<Image>().sprite;
+            leftImage.SetNativeSize();
+            rightImage.sprite = teamIcons[1].GetComponent<Image>().sprite;
+            rightImage.SetNativeSize();
         }
         
         // 경기 시작 함수
