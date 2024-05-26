@@ -126,7 +126,7 @@ public class MainSystem : MonoBehaviour
 
     public void IncreaseMatchNum()
     {
-        Match_num++;
+        Match_num = (Match_num +1)%144;
     }
     public void SetResults()
     {

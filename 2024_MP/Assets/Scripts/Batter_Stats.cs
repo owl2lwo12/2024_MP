@@ -322,14 +322,14 @@ public class Batter_Stats : Human
             if (speed < p_speed)
             {
                 if (p > 0.9f) speed++;
-                if (_r < training_style) speed++;
+                if (_r > training_style) speed++;
             }
             else
             {
                 if (p > 0.995f) speed++;
                 if(p > 0.999f)
                 {
-                    if (_r < training_style) p_speed++;
+                    if (_r > training_style) p_speed++;
                 }
             }
             if (contact < p_contact)
