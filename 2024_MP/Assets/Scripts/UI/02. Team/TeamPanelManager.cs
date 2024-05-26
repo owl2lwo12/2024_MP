@@ -18,12 +18,12 @@ public class TeamPanelManager : Singleton<TeamPanelManager>
     private void Update()
     {
         _myTeam = MainSystem._instance.teams[0].GetComponent<Team_Scripts>();
-        int game = MainSystem._instance.Match_num;
         int win = _myTeam.Win;
         int lose = _myTeam.Lose;
         int draw = _myTeam.Draw;
         float rate = _myTeam.WinRate;
         int rank = _myTeam.Rank;
+        int game = win + lose + draw;
         SettingTeamInformationText(game, win, lose, draw, rate, rank);
     }
 
