@@ -42,6 +42,14 @@ public class MainSystem : MonoBehaviour
     [SerializeField]
     private int stats_Change = 12;
 
+    private int opposite_Team_Index = 1;
+    private int score_result_home = 0;
+    private int score_result_away = 0;
+
+    public int Opposite_Team_Index { get => opposite_Team_Index; set => opposite_Team_Index = value; }
+    public int Score_result_home { get => score_result_home; set => score_result_home = value; }
+    public int Score_result_away { get => score_result_away; set => score_result_away = value; }
+
     public void MakeRank()
     {
         team_Rank.Sort(new Compare_Rank());

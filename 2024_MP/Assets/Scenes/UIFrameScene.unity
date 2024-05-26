@@ -33400,7 +33400,19 @@ MonoBehaviour:
   maxMatch: 144
   onStartMatch:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1719984547}
+        m_TargetAssemblyTypeName: MainSystem, Assembly-CSharp
+        m_MethodName: Make_Match_Result
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   descSeasonRank: "Season Rank \uBCC0\uC218 \uBAA8\uC74C"
   myCurRank: 0
   rankList:
@@ -34026,6 +34038,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14db50aa0dab3a6468b53749087b5456, type: 3}
+--- !u!114 &1719984547 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 918865419755182734, guid: 14db50aa0dab3a6468b53749087b5456, type: 3}
+  m_PrefabInstance: {fileID: 1719984546}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa0046efb7ba3cc47ba29591809c0220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1720052638
 GameObject:
   m_ObjectHideFlags: 0
