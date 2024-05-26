@@ -51,9 +51,10 @@ public class Batter_Stats : Human
     // 수비능력치(defense 0 ~ 100) 기준 사람같이 한다는 1루수 20정도? 좌익/우익은 50정도?
     // 3루 55, 포수 - 포수출신 아니면 거의 가능한 사람이 없는 걸로. 선천적으로 해본 적 없으면
     // 2루/ 중견 70? 유격 80 --> 이후 실 능력치에 따라 포지션 수비 훈련 효율이 달라지도록/
+    [SerializeField]
     private def_position main_pos;
     private List<def_position> sub_pos;
-    private int pos_stats_main;
+    private int pos_stats_main = 0;
     private List<int> pos_stats_sub;
 
     //season records;
@@ -309,7 +310,7 @@ public class Batter_Stats : Human
                 if (p > 0.995f) power++;
                 if (p > 0.999f)
                 {
-                    int _r = R
+                    int _r;
                 }
             }
             if (speed < p_speed)

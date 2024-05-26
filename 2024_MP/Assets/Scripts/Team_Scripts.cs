@@ -57,6 +57,11 @@ public class Team_Scripts : MonoBehaviour
     private List<GameObject> line_up_pitchers_start; //경기에 뛸 투수 라인업
     private List<GameObject> line_up_pitchers_sub; //경기에 뛸 중계 투수 라인업
 
+    private void Update()
+    {
+        current_player = batterrplayerlist.Count+pitcherplayerlist.Count;
+    }
+
     public List<GameObject> Batterrplayerlist { get => batterrplayerlist; set => batterrplayerlist = value; }
     public List<GameObject> Pitcherplayerlist { get => pitcherplayerlist; set => pitcherplayerlist = value; }
     public float WinRate { get => winRate; set => winRate = value; }
