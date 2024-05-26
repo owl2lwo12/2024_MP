@@ -42,13 +42,15 @@ public class MainSystem : MonoBehaviour
     [SerializeField]
     private int stats_Change = 12;
 
-    private int opposite_Team_Index = 1;
+    private int players_Match_Index = 1;
     private int score_result_home = 0;
     private int score_result_away = 0;
+    private String matchResult = "??";
 
-    public int Opposite_Team_Index { get => opposite_Team_Index; set => opposite_Team_Index = value; }
+    public int Players_Match_Index { get => players_Match_Index; set => players_Match_Index = value; }
     public int Score_result_home { get => score_result_home; set => score_result_home = value; }
     public int Score_result_away { get => score_result_away; set => score_result_away = value; }
+    public string MatchResult { get => matchResult; set => matchResult = value; }
 
     public void MakeRank()
     {
@@ -89,6 +91,7 @@ public class MainSystem : MonoBehaviour
             j++;
         }
     }
+
     public void new_season()
     {
         match_num = 0;
@@ -112,7 +115,25 @@ public class MainSystem : MonoBehaviour
     {
         match_num++;
     }
-    
+    public void SetResults()
+    {
+        d = sched.GetComponent<ScheduleMaker>().getSched(match_num - 1);
+        int home = d.getMatch(players_Match_Index, playersTeam).getHome();
+        int away = d.getMatch(players_Match_Index, playersTeam).getAway();
+
+        if (home == 0)
+        {
+            if (score_result_home > score_result_away) matchResult = "Win";
+            else if (score_result_away == score_result_home) matchResult = "Draw";
+            else matchResult = "Lose";
+        }
+        else
+        {
+            if (score_result_home < score_result_away) matchResult = "Win";
+            else if (score_result_away == score_result_home) matchResult = "Draw";
+            else matchResult = "Lose";
+        }
+    }
     public void Make_Match_Result()
     {
         if (match_num % 20 == 0)
@@ -138,6 +159,10 @@ public class MainSystem : MonoBehaviour
             int away = d.getMatch(i, playersTeam).getAway();
 
             Make_Each_Match_Result(home,away);
+            if(home == 0 || away == 0)
+            {
+                players_Match_Index = i;
+            }
         }
         foreach(GameObject t in teams)
         {
@@ -155,6 +180,7 @@ public class MainSystem : MonoBehaviour
         {
             t.GetComponent<Team_Scripts>().SetWinRate();
         }
+        SetResults();
     }
     public void Make_Each_Match_Result(int i,int j) //index 2개(각 팀의 index)를 받아와서 두 팀의 라인업을 비교후에 
     {
@@ -1189,6 +1215,11 @@ public class MainSystem : MonoBehaviour
         {
             teams[j].GetComponent<Team_Scripts>().Match_Lose();
             teams[i].GetComponent<Team_Scripts>().Match_Win();
+        }
+        if (i == 0 || j == 0)
+        {
+            score_result_home = teamScoreHome;
+            score_result_away = teamScoreAway;
         }
     }
 
