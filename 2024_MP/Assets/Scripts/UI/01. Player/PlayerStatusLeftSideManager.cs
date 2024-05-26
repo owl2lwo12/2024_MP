@@ -24,9 +24,10 @@ namespace UI.Player
         public Slider playerInjurySlider;
         
         [Header("선수 리스트")]
-        public List<Batter_Stats> playerList = new List<Batter_Stats>(); // 선수 리스트
+        public List<GameObject> playerList = new List<GameObject>(); // 선수 리스트
+        private List<Batter_Stats> _batterStatsList = new List<Batter_Stats>();
         public List<TMP_Dropdown.OptionData> optionData = new List<TMP_Dropdown.OptionData>(); // 드롭다운 리스트
-        
+        public Team_Scripts myTeam;
         
         void Start()
         {
@@ -61,10 +62,16 @@ namespace UI.Player
         public void InitPlayerList()
         {
             // TODO : 선수 리스트 받아오기
+            playerList = myTeam.Batterrplayerlist;
+            
+            foreach (var gameObject in playerList)
+            {
+                _batterStatsList.Add(gameObject.GetComponent<Batter_Stats>());
+            }
             
             if (playerList.Count > 0)
             {
-                foreach (var player in playerList)
+                foreach (var player in _batterStatsList)
                 {
                     optionData.Add(new TMP_Dropdown.OptionData(player.getname()));
                 }
@@ -85,7 +92,8 @@ namespace UI.Player
         // Dropdown에서 선택한 플레이어가 변경됐을 때 실행시킬 함수
         public void OnChangedPlayer()
         {
-            Batter_Stats player = playerList[dropdown.value];
+            GameObject go = playerList[dropdown.value];
+            Batter_Stats player = go.GetComponent<Batter_Stats>();
             
             // 현재 선택된 플레이어 이름으로 변경
             string newPlayerName = dropdown.options[dropdown.value].text;

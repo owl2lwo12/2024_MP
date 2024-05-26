@@ -75,10 +75,10 @@ public class MainSystem : MonoBehaviour
 
     private void Start()
     {
-        foreach(GameObject t in teams)
+        /*foreach(GameObject t in teams)
         {
             team_Rank.Add(t);
-        }
+        }*/
         sched = GameObject.Find("Scheduler");
         new_season();
         d = sched.GetComponent<ScheduleMaker>().getSched(match_num);
