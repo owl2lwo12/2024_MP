@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
+using UI.Player;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -24,8 +26,12 @@ namespace UI._01._Player
         public TMP_Text eyeText;
         public TMP_Text intelligenceText;
 
-        [Header("스킬")] 
+        [Header("성장")] 
+        public Slider maintainSlider;
+        public Slider batSlider;
+        public Slider hittingSlider;
         public Slider zoneSlider;
+        public Slider driveSlider;
 
         private int _minStatus = 20;
         private int _maxStatus = 100;
@@ -106,12 +112,43 @@ namespace UI._01._Player
         }
 
         /// <summary>
-        /// 플레이어의 Skill UI를 설정해주는 함수
+        /// 플레이어의 Train UI를 설정해주는 함수
         /// </summary>
         /// <param name="player">해당 플레이어 파라미터</param>
-        public void SetPlayerSkillUI(Batter_Stats player)
+        public void SetPlayerTrainUI(Batter_Stats player)
         {
+            maintainSlider.value = player.Training_style;
+            batSlider.value = player.Batting_theory;
+            hittingSlider.value = player.Batting_position;
+            zoneSlider.value = player.Zone_size;
+            driveSlider.value = player.Batting_positive;
             
+        }
+
+        public void OnValueChangedTrainingStyle()
+        {
+            Batter_Stats player = PlayerStatusLeftSideManager.Instance.GetCurPlayer();
+            player.Training_style = (int)maintainSlider.value;
+        }
+        public void OnValueChangedBattingTheory()
+        {
+            Batter_Stats player = PlayerStatusLeftSideManager.Instance.GetCurPlayer();
+            player.Batting_theory = (int)batSlider.value;
+        }
+        public void OnValueChangedBattingPosition()
+        {
+            Batter_Stats player = PlayerStatusLeftSideManager.Instance.GetCurPlayer();
+            player.Batting_position = (int)hittingSlider.value;
+        }
+        public void OnValueChangedZoneSize()
+        {
+            Batter_Stats player = PlayerStatusLeftSideManager.Instance.GetCurPlayer();
+            player.Zone_size = (int)zoneSlider.value;
+        }
+        public void OnValueChangedBattingPositive()
+        {
+            Batter_Stats player = PlayerStatusLeftSideManager.Instance.GetCurPlayer();
+            player.Batting_positive = (int)driveSlider.value;
         }
     }
 }

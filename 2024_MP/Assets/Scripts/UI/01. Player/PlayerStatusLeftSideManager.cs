@@ -106,9 +106,9 @@ namespace UI.Player
             // 툴 변경
             PlayerStatusCenterSideManager.Instance.SetPlayerToolUI(player);
             // 스킬 변경
-            PlayerStatusCenterSideManager.Instance.SetPlayerSkillUI(player);
+            PlayerStatusCenterSideManager.Instance.SetPlayerTrainUI(player);
         }
-
+        
         // 기본 스탯 UI 설정
         void SetPlayerBasicStatsUI(Batter_Stats player)
         {
@@ -140,6 +140,15 @@ namespace UI.Player
                     playerInjurySlider.value = 5.0f;
                     break;
             }
+        }
+
+        public Batter_Stats GetCurPlayer()
+        {
+            Batter_Stats player = null;
+
+            player = _batterStatsList[dropdown.value];
+            
+            return player;
         }
     }
 }
