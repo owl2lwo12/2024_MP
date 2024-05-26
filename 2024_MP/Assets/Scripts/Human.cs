@@ -36,7 +36,7 @@ public class Human : MonoBehaviour
     private injury injured = injury.fine; //부상 종류
 
     //constructor
-    public Human()
+    /*public Human()
     {
         g_age = Random.Range(-2, 3) + 30;
         c_age = Random.Range(-2, 3) + 37;
@@ -49,7 +49,7 @@ public class Human : MonoBehaviour
         weight = height - 100;
         weight += Random.Range(5, 30);
         muscle = Random.Range(20, 40);
-    }
+    }*/
 
     public bool Retirement() //선수 은퇴 ---> 데이터 형이니까 삭제? 잘 모름
     {

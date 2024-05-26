@@ -42,7 +42,7 @@ public class Pitcher_Stats : Human
     }
 
     // Constructor
-    public Pitcher_Stats()
+   /* public Pitcher_Stats()
     {
         pSpeed = Random.Range(20, 101);
         stamina = Random.Range(20, 121);
@@ -54,7 +54,7 @@ public class Pitcher_Stats : Human
 
         if (Random.Range(0, 100) > 75) hand = true;
         else hand = false;
-    }
+    }*/
     public void ReuseData()
     {
         pSpeed = Random.Range(20, 101);

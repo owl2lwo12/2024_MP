@@ -113,7 +113,7 @@ public class Batter_Stats : Human
     public int Zone_size { get => zone_size; set => zone_size = value; }
 
     // Constructor
-    public Batter_Stats()
+    /*public Batter_Stats()
     {
         p_power = Random.Range(20, 101); 
         p_speed = Random.Range(20, 101);
@@ -246,7 +246,7 @@ public class Batter_Stats : Human
         batting_position = Random.Range(0, 101);
         batting_positive = Random.Range(0, 101);
         zone_size = Random.Range(0, 101);
-    }
+    }*/
     public void ReuseData()
     {
         p_power = Random.Range(20, 101);
