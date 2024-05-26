@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using TMPro;
+using UnityEditor;
 
 
 /*
@@ -17,12 +18,20 @@ using TMPro;
  *  4. 진행중인 시즌의 현황을 가질 수 있어야 한다.
  */
 
+public class Compare_Rank: IComparer<GameObject>
+{
+    public int Compare(GameObject a, GameObject b)
+    {
+        return b.GetComponent<Team_Scripts>().WinRate.CompareTo(a.GetComponent<Team_Scripts>().WinRate);
+    }
+}
 
 public class MainSystem : MonoBehaviour
 {
     public static MainSystem _instance = null;
     
     public GameObject[] teams;
+    private List<GameObject> team_Rank;
     public GameObject sched;
     public int[] currmatch = new int[10];
     [SerializeField]
@@ -33,6 +42,14 @@ public class MainSystem : MonoBehaviour
     [SerializeField]
     private int stats_Change = 12;
 
+    public void MakeRank()
+    {
+        team_Rank.Sort(new Compare_Rank());
+        for(int i = 0; i< 10; i++)
+        {
+            team_Rank[i].GetComponent<Team_Scripts>().Rank = i + 1;
+        }
+    }
     private void Awake()
     {
         if (_instance == null)
@@ -48,6 +65,10 @@ public class MainSystem : MonoBehaviour
 
     private void Start()
     {
+        foreach(GameObject t in teams)
+        {
+            team_Rank.Add(t);
+        }
         sched = GameObject.Find("Scheduler");
         new_season();
         d = sched.GetComponent<ScheduleMaker>().getSched(match_num);
@@ -121,6 +142,10 @@ public class MainSystem : MonoBehaviour
         if(match_num%stats_Change == 0)
         {
             StatChange();
+        }
+        foreach(GameObject t in teams)
+        {
+            t.GetComponent<Team_Scripts>().SetWinRate();
         }
     }
     public void Make_Each_Match_Result(int i,int j) //index 2개(각 팀의 index)를 받아와서 두 팀의 라인업을 비교후에 

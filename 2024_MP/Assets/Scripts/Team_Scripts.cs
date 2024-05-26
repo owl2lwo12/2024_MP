@@ -41,6 +41,8 @@ public class Team_Scripts : MonoBehaviour
     [SerializeField]
     private int current_player = 59; // 현재 구단에 존재하는 선수의 수
     // 시즌 등수 계산 시에 사용할 스탯
+    private int rank = 1;
+    private float winRate = 0;
     private int win = 0;
     private int lose = 0;
     private int draw = 0;
@@ -57,6 +59,8 @@ public class Team_Scripts : MonoBehaviour
 
     public List<GameObject> Batterrplayerlist { get => batterrplayerlist; set => batterrplayerlist = value; }
     public List<GameObject> Pitcherplayerlist { get => pitcherplayerlist; set => pitcherplayerlist = value; }
+    public float WinRate { get => winRate; set => winRate = value; }
+    public int Rank { get => rank; set => rank = value; }
 
     public GameObject Change_Pitcher(int score_gap)
     {
@@ -266,6 +270,10 @@ public class Team_Scripts : MonoBehaviour
                 line_up_pitchers_sub.Add(player);
             }
         }
+    }
+    public void SetWinRate()
+    {
+        WinRate = (float)win / ((float)win + (float)lose);
     }
     public void Waiver() // 가치가 없다고 평가되는 선수 해고. 선수는 삭제
     {
