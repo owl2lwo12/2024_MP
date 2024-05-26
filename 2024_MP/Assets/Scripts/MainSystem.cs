@@ -32,6 +32,7 @@ public class MainSystem : MonoBehaviour
     public static MainSystem _instance = null;
     
     public GameObject[] teams;
+    [SerializeField]
     private List<GameObject> team_Rank;
     public GameObject sched;
     public int[] currmatch = new int[10];
@@ -50,6 +51,8 @@ public class MainSystem : MonoBehaviour
     private int score_result_away = 0;
     [SerializeField]
     private String matchResult = "??";
+    [SerializeField]
+    private int[] ranking = new int[10];
 
     public int Players_Match_Index { get => players_Match_Index; set => players_Match_Index = value; }
     public int Score_result_home { get => score_result_home; set => score_result_home = value; }
@@ -63,6 +66,10 @@ public class MainSystem : MonoBehaviour
         for(int i = 0; i< 10; i++)
         {
             team_Rank[i].GetComponent<Team_Scripts>().Rank = i + 1;
+        }
+        for(int i = 0; i < 10; i++)
+        {
+            ranking[teams[i].GetComponent<Team_Scripts>().Rank - 1] = i;
         }
     }
     private void Awake()
@@ -80,10 +87,10 @@ public class MainSystem : MonoBehaviour
 
     private void Start()
     {
-        /*foreach(GameObject t in teams)
+        foreach(GameObject t in teams)
         {
             team_Rank.Add(t);
-        }*/
+        }
         sched = GameObject.Find("Scheduler");
         new_season();
         d = sched.GetComponent<ScheduleMaker>().getSched(Match_num);
@@ -186,7 +193,7 @@ public class MainSystem : MonoBehaviour
             t.GetComponent<Team_Scripts>().SetWinRate();
         }
         SetResults();
-
+        MakeRank();
         PlayPanelManager.Instance.SettingMatchResultUI(score_result_home, score_result_away, matchResult);
     }
     public void Make_Each_Match_Result(int i,int j) //index 2개(각 팀의 index)를 받아와서 두 팀의 라인업을 비교후에 
