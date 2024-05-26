@@ -66,6 +66,9 @@ public class Team_Scripts : MonoBehaviour
     public List<GameObject> Pitcherplayerlist { get => pitcherplayerlist; set => pitcherplayerlist = value; }
     public float WinRate { get => winRate; set => winRate = value; }
     public int Rank { get => rank; set => rank = value; }
+    public int Win { get => win; set => win = value; }
+    public int Draw { get => draw; set => draw = value; }
+    public int Lose { get => lose; set => lose = value; }
 
     public GameObject Change_Pitcher(int score_gap)
     {
@@ -278,7 +281,7 @@ public class Team_Scripts : MonoBehaviour
     }
     public void SetWinRate()
     {
-        WinRate = (float)win / ((float)win + (float)lose);
+        WinRate = (float)Win / ((float)Win + (float)Lose);
     }
     public void Waiver() // 가치가 없다고 평가되는 선수 해고. 선수는 삭제
     {
@@ -307,15 +310,15 @@ public class Team_Scripts : MonoBehaviour
     }
     public void Match_Lose()
     {
-        lose++;
+        Lose++;
     }
     public void Match_Win()
     {
-        win++;
+        Win++;
     }
     public void Match_Draw()
     {
-        draw++;
+        Draw++;
     }
 
     public GameObject get_start_pitcher(int i) { return line_up_pitchers_start[i]; }

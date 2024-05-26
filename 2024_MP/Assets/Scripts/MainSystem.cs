@@ -51,6 +51,7 @@ public class MainSystem : MonoBehaviour
     public int Score_result_home { get => score_result_home; set => score_result_home = value; }
     public int Score_result_away { get => score_result_away; set => score_result_away = value; }
     public string MatchResult { get => matchResult; set => matchResult = value; }
+    public int Match_num { get => match_num; set => match_num = value; }
 
     public void MakeRank()
     {
@@ -81,7 +82,7 @@ public class MainSystem : MonoBehaviour
         }*/
         sched = GameObject.Find("Scheduler");
         new_season();
-        d = sched.GetComponent<ScheduleMaker>().getSched(match_num);
+        d = sched.GetComponent<ScheduleMaker>().getSched(Match_num);
         int j = 0;
         for(int i = 0; i< 5; i++)
         {
@@ -94,13 +95,13 @@ public class MainSystem : MonoBehaviour
 
     public void new_season()
     {
-        match_num = 0;
+        Match_num = 0;
         sched.GetComponent<ScheduleMaker>().MakeSchedule();
     }
     
     private void Update()
     {
-        d = sched.GetComponent<ScheduleMaker>().getSched(match_num);
+        d = sched.GetComponent<ScheduleMaker>().getSched(Match_num);
         int j = 0;
         for (int i = 0; i < 5; i++)
         {
@@ -113,11 +114,11 @@ public class MainSystem : MonoBehaviour
 
     public void IncreaseMatchNum()
     {
-        match_num++;
+        Match_num++;
     }
     public void SetResults()
     {
-        d = sched.GetComponent<ScheduleMaker>().getSched(match_num - 1);
+        d = sched.GetComponent<ScheduleMaker>().getSched(Match_num - 1);
         int home = d.getMatch(players_Match_Index, playersTeam).getHome();
         int away = d.getMatch(players_Match_Index, playersTeam).getAway();
 
@@ -136,7 +137,7 @@ public class MainSystem : MonoBehaviour
     }
     public void Make_Match_Result()
     {
-        if (match_num % 20 == 0)
+        if (Match_num % 20 == 0)
         {
             for (int i = 0; i < 9; i++)
             {
@@ -152,7 +153,7 @@ public class MainSystem : MonoBehaviour
                 teams[i].GetComponent<Team_Scripts>().LineUp();
             }
         }
-        d = sched.GetComponent<ScheduleMaker>().getSched(match_num);
+        d = sched.GetComponent<ScheduleMaker>().getSched(Match_num);
         for(int i = 0; i < 5; i++) //각 경기를 수행(총 5경기)
         {
             int home = d.getMatch(i, playersTeam).getHome();
@@ -171,8 +172,8 @@ public class MainSystem : MonoBehaviour
                 p.GetComponent<Pitcher_Stats>().One_Match(); //경기가 끝났으니까 
             }
         }
-        match_num++;
-        if(match_num%stats_Change == 0)
+        Match_num++;
+        if(Match_num%stats_Change == 0)
         {
             StatChange();
         }
@@ -197,8 +198,8 @@ public class MainSystem : MonoBehaviour
         int home_turned_batter = 0;
         int away_turned_batter = 0;
 
-        GameObject home_Pitcher = teams[i].GetComponent<Team_Scripts>().get_start_pitcher(match_num%5);
-        GameObject away_Pitcher = teams[j].GetComponent<Team_Scripts>().get_start_pitcher(match_num%5);
+        GameObject home_Pitcher = teams[i].GetComponent<Team_Scripts>().get_start_pitcher(Match_num%5);
+        GameObject away_Pitcher = teams[j].GetComponent<Team_Scripts>().get_start_pitcher(Match_num%5);
 
         List<GameObject> home_Batters = teams[i].GetComponent<Team_Scripts>().get_batters();
         List<GameObject> away_Batters = teams[j].GetComponent<Team_Scripts>().get_batters();
