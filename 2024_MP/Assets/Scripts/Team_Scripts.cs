@@ -48,14 +48,18 @@ public class Team_Scripts : MonoBehaviour
     private int draw = 0;
     // 선수 명단, 투수/  타자 --> 실제 게임에서는 타자 데이터만 사용될 확률이 높다.
     [SerializeField]
-    private List<GameObject> batterrplayerlist;
+    private List<GameObject> batterrplayerlist = new List<GameObject>();
     [SerializeField]
-    private List<GameObject> pitcherplayerlist;
+    private List<GameObject> pitcherplayerlist = new List<GameObject>();
 
-    private List<GameObject> line_up_batters_start; //경기에 뛸 타자 라인업 9
-    private List<GameObject> line_up_batters_sub; //경기에 뛸 후보 타자 라인업
-    private List<GameObject> line_up_pitchers_start; //경기에 뛸 투수 라인업
-    private List<GameObject> line_up_pitchers_sub; //경기에 뛸 중계 투수 라인업
+    [SerializeField]
+    private List<GameObject> line_up_batters_start = new List<GameObject>(); //경기에 뛸 타자 라인업 9
+    [SerializeField]
+    private List<GameObject> line_up_batters_sub = new List<GameObject>(); //경기에 뛸 후보 타자 라인업
+    [SerializeField] 
+    private List<GameObject> line_up_pitchers_start = new List<GameObject>(); //경기에 뛸 투수 라인업
+    [SerializeField] 
+    private List<GameObject> line_up_pitchers_sub = new List<GameObject>(); //경기에 뛸 중계 투수 라인업
 
     private void Update()
     {
@@ -98,7 +102,7 @@ public class Team_Scripts : MonoBehaviour
         // 6,7,8,9는 각각 6 -> 9 -> 7 -> 8 순서로 오버롤 높은 선수를 배치한다. ---- 이거 아님
         // 먼저 오버롤 순서대로 포지션 비었으면 채우고,
         bool[] cur_pos = new bool[8];
-        foreach (var player in Batterrplayerlist)
+        foreach (GameObject player in Batterrplayerlist)
         {
             switch (player.GetComponent<Batter_Stats>().getmaindefposition())
             {
@@ -321,7 +325,9 @@ public class Team_Scripts : MonoBehaviour
         Draw++;
     }
 
-    public GameObject get_start_pitcher(int i) { return line_up_pitchers_start[i]; }
+    public GameObject get_start_pitcher(int i) {
+        Debug.Log(i);
+        return line_up_pitchers_start[i]; }
     public List<GameObject> get_sub_pitcher() { return line_up_pitchers_sub; }
     public List<GameObject> get_batters() { return line_up_batters_start; }
     public List<GameObject> get_sub_batters() { return line_up_batters_sub; }
