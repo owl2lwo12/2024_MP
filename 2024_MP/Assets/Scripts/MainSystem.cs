@@ -59,6 +59,7 @@ public class MainSystem : MonoBehaviour
     public int Score_result_away { get => score_result_away; set => score_result_away = value; }
     public string MatchResult { get => matchResult; set => matchResult = value; }
     public int Match_num { get => match_num; set => match_num = value; }
+    public int[] Ranking { get => ranking; set => ranking = value; }
 
     public void MakeRank()
     {
@@ -69,7 +70,7 @@ public class MainSystem : MonoBehaviour
         }
         for(int i = 0; i < 10; i++)
         {
-            ranking[teams[i].GetComponent<Team_Scripts>().Rank - 1] = i;
+            Ranking[teams[i].GetComponent<Team_Scripts>().Rank - 1] = i;
         }
     }
     private void Awake()
