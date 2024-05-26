@@ -62,8 +62,6 @@ namespace UI.Season
         // 매치 아이콘 설정 함수
         public void SetMatchIcons()
         {
-            Debug.Log("아이콘 설정");
-            
             for(int i = 0; i < _curMatch.Length; i++)
             {
                 // i 번째 순서의 팀
