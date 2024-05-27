@@ -23,6 +23,7 @@ namespace UI.Season
         public TMP_Text leftScore;
         public TMP_Text rightScore;
         public TMP_Text winOrLose;
+        public float matchTime = 2f;
 
         [Header("오브젝트 관리")] 
         public GameObject loadingPanel;
@@ -105,7 +106,7 @@ namespace UI.Season
             teamGroup.SetActive(false);
             scoreGroup.SetActive(false);
             
-            Invoke("OnLoadMatchResult", 2f);
+            Invoke("OnLoadMatchResult", matchTime);
             
             // UIManager에 OnStartMatch 실행
             UIManager.Instance.OnStartMatch();
