@@ -78,16 +78,18 @@ public class Batter_Stats : Human
 
     //details
     [SerializeField]
-    private int training_style = 0; // 100일수록 웨이트 트레이닝 위주(0~10)
+    private int training_style = 0; // 10일수록 웨이트 트레이닝 위주(0~10)
     [SerializeField]
-    private int batting_theory = 0; // 100일수록 뜬공 지향(0~10)
+    private int batting_theory = 0; // 10일수록 뜬공 지향(0~10)
+    private float training_result_bt = 0; //훈련 결과
     [SerializeField]
-    private int batting_position = 0; //100일수록 로테이셔널 히팅에 가깝게(0~10)
+    private int batting_position = 0; //10일수록 로테이셔널 히팅에 가깝게(0~10)
+    private float training_result_bp = 0; //훈련결과
 
     [SerializeField]
-    private int batting_positive = 0; //100에 가까울수록 적극적인 스윙(0~10)
+    private int batting_positive = 0; //10에 가까울수록 적극적인 스윙(0~10)
     [SerializeField]
-    private int zone_size = 0;//100에 가까울수록 존의 크기를 크게 잡는다.(0~10)
+    private int zone_size = 0;//10에 가까울수록 존의 크기를 크게 잡는다.(0~10)
 
     //getset records
     public int Hit { get => hit; set => hit = value; }
@@ -267,11 +269,23 @@ public class Batter_Stats : Human
     }
 
     //getter
-    public int getpower() { return power; }
+    public int getpower() 
+    {
+        int p = power + (int)training_result_bt / 3 - (int)training_result_bp / 3 - zone_size/4;
+        return p; 
+    }
     public int getspeed() { return speed; }
-    public int getcontact() { return contact; }
+    public int getcontact() 
+    {
+        int c = contact + (10 - (int)training_result_bt) / 3 + (int)training_result_bp / 3 + batting_positive/3 + zone_size/2;
+        return c;
+    }
     public int getdefense() { return defense; }
-    public int geteye() { return eye; }
+    public int geteye() 
+    {
+        int e = eye - batting_positive / 2 - zone_size/3;
+        return e; 
+    }
     public int getintelligence() { return intelligence; }
     public def_position getmaindefposition() { return main_pos; }
     public List<def_position> getsubdefposition() { return sub_pos; }
@@ -301,6 +315,7 @@ public class Batter_Stats : Human
     public void After_Match() //일정 경기가 끝날 때 마다 랜덤한 수치적 상승, 훈련 조건도 추후 추가할 것
     {
         //Debug.Log("stats change");
+        //세부 스탯 넣기
         float p;
         if (getage() <= getgage())
         {
@@ -308,8 +323,16 @@ public class Batter_Stats : Human
             int _r = Random.Range(0, 10);
             if (power < p_power)
             {
-                if (p > 0.9f) power++;                
-                if (_r < training_style) power++;
+                if (p > 0.9f)
+                {
+                    power++;
+
+                    if (_r < training_style)
+                    {
+                        power++;
+                        speed--;
+                    }
+                }
             }
             else
             {
@@ -319,10 +342,18 @@ public class Batter_Stats : Human
                     if (_r < training_style) p_power++;
                 }
             }
+            p = Random.Range(0f, 1f);
             if (speed < p_speed)
             {
-                if (p > 0.9f) speed++;
-                if (_r > training_style) speed++;
+                if (p > 0.9f)
+                {
+                    speed++;
+                    if (_r > training_style)
+                    {
+                        speed++;
+                        power--;
+                    }
+                }
             }
             else
             {
@@ -332,6 +363,7 @@ public class Batter_Stats : Human
                     if (_r > training_style) p_speed++;
                 }
             }
+            p = Random.Range(0f, 1f);
             if (contact < p_contact)
             {
                 if (p > 0.9f) contact++;
@@ -340,6 +372,7 @@ public class Batter_Stats : Human
             {
                 if (p > 0.995f) contact++;
             }
+            p = Random.Range(0f, 1f);
             if (eye < p_eye)
             {
                 if (p > 0.9f) eye++;
@@ -348,6 +381,7 @@ public class Batter_Stats : Human
             {
                 if (p > 0.995f) eye++;
             }
+            p = Random.Range(0f, 1f);
             if (intelligence < p_intelligence)
             {
                 if (p > 0.9f) intelligence++;
@@ -359,30 +393,51 @@ public class Batter_Stats : Human
         }
         else if(getgage()<= getcage())
         {
-            p = Random.Range(0, 6);
+            p = Random.Range(0f, 6f);
             if(power > p_power)
                 power -= (int)p / 5;
-            if(speed > p_speed)
+            p = Random.Range(0f, 6f);
+            if (speed > p_speed)
                 speed -= (int)p / 5;
-            if(contact > p_contact)
+            p = Random.Range(0f, 6f);
+            if (contact > p_contact)
                 contact -= (int)p / 5;
-            if(eye > p_eye)
+            p = Random.Range(0f, 6f);
+            if (eye > p_eye)
                 eye -= (int)p / 5;
-            if(intelligence > p_intelligence)
+            p = Random.Range(0f, 6f);
+            if (intelligence > p_intelligence)
                 intelligence -= (int)p / 5;
         }
         else
         {
-            p = Random.Range(-3, 1);
+            p = Random.Range(-3f, 1f);
             power += (int)p;
-            p = Random.Range(-3, 1);
+            p = Random.Range(-3f, 1f);
             contact += (int)p;
-            p = Random.Range(-3, 1);
+            p = Random.Range(-3f, 1f);
             eye += (int)p;
-            p = Random.Range(-3, 1);
+            p = Random.Range(-3f, 1f);
             intelligence += (int)p;
-            p = Random.Range(-3, 1);
+            p = Random.Range(-3f, 1f);
             speed += (int)p;
+        }
+
+        if(training_result_bp > (float)batting_position)
+        {
+             training_result_bp += Random.Range(-0.5f,0f);
+        }else if(training_result_bp < (float)batting_position)
+        {
+            training_result_bp += Random.Range(0f, 0.5f);
+        }
+
+        if (training_result_bt > (float)batting_theory)
+        {
+            training_result_bt += Random.Range(-0.5f, 0f);
+        }
+        else if (training_result_bt < (float)batting_theory)
+        {
+            training_result_bt += Random.Range(0f, 0.5f);
         }
     }
     public void One_Match() //main position만 성장 + 특정 포지션으로 출장 시 추가적 성장 있을 것(다른 함수에서)
