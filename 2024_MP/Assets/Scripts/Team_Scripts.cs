@@ -78,11 +78,27 @@ public class Team_Scripts : MonoBehaviour
     {
         if(Mathf.Abs(score_gap) <= 3)
         {
-            return line_up_batters_sub[Random.Range(0, 3)];
+            GameObject g = null;
+            for(int i = 0; i < 7; i++)
+            {
+                if (line_up_pitchers_sub[i].GetComponent<Pitcher_Stats>().CStamina > 20)
+                {
+                    g = line_up_pitchers_sub[i];
+                }
+            }
+            return g;
         }
         else
         {
-            return line_up_batters_sub[Random.Range(3,7)];
+            GameObject g = null;
+            for (int i = 6; i <= 0; i--)
+            {
+                if (line_up_pitchers_sub[i].GetComponent<Pitcher_Stats>().CStamina > 20)
+                {
+                    g = line_up_pitchers_sub[i];
+                }
+            }
+            return null;
         }
     }
     public void Sorting_Players() //매 경기 sort하면 게임 로딩이 너무 길어질 것 같아서 일단 분리해놓음

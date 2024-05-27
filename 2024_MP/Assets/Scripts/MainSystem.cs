@@ -226,11 +226,12 @@ public class MainSystem : MonoBehaviour
 
             if (turn == true)
             {
-                h += (away_Batters[away_turned_batter].GetComponent<Batter_Stats>().getpower() - home_Pitcher.GetComponent<Pitcher_Stats>().getspeed()) / 2;
-                c += (away_Batters[away_turned_batter].GetComponent<Batter_Stats>().getcontact() - home_Pitcher.GetComponent<Pitcher_Stats>().getcontrol());
-                bb += (away_Batters[away_turned_batter].GetComponent<Batter_Stats>().geteye() - home_Pitcher.GetComponent<Pitcher_Stats>().getcontrol()) / 4;
+                h += (away_Batters[away_turned_batter].GetComponent<Batter_Stats>().getpower() - home_Pitcher.GetComponent<Pitcher_Stats>().getspeed()) / 3;
+                c += (away_Batters[away_turned_batter].GetComponent<Batter_Stats>().getcontact() - home_Pitcher.GetComponent<Pitcher_Stats>().getcontrol())/3;
+                bb += (away_Batters[away_turned_batter].GetComponent<Batter_Stats>().geteye() - home_Pitcher.GetComponent<Pitcher_Stats>().getcontrol()) / 5;
 
                 int rslt = UnityEngine.Random.Range(1, 501);
+                int itl = away_Batters[away_turned_batter].GetComponent<Batter_Stats>().getintelligence();
                 if (rslt < h) //홈런일 때
                 {
                     int scored = 1;
@@ -241,6 +242,10 @@ public class MainSystem : MonoBehaviour
                     away_Batters[away_turned_batter].GetComponent<Batter_Stats>().Score += scored;
                     home_Pitcher.GetComponent<Pitcher_Stats>().Era += scored;
                     teamScoreAway += scored;
+                    int t = UnityEngine.Random.Range(0, 501);
+                    t = 6 - t / itl;
+                    if (t <= 0) t = 1;
+                    home_Pitcher.GetComponent<Pitcher_Stats>().CStamina -= t;
                 }
                 else if (rslt < c) // 안타일 때
                 {
@@ -634,6 +639,10 @@ public class MainSystem : MonoBehaviour
                             }
                         }
                     }
+                    int t = UnityEngine.Random.Range(0, 501);
+                    t = 6 - t / itl;
+                    if (t <= 0) t = 1;
+                    home_Pitcher.GetComponent<Pitcher_Stats>().CStamina -= t;
                 }
                 else if (rslt < c + bb) //볼넷일 때
                 {
@@ -669,6 +678,10 @@ public class MainSystem : MonoBehaviour
                     {
                         f_base = true;
                     }
+                    int t = UnityEngine.Random.Range(0, 501);
+                    t = 8 - t / itl;
+                    if (t <= 0) t = 1;
+                    home_Pitcher.GetComponent<Pitcher_Stats>().CStamina -= t;
                 }
                 else //아웃
                 {
@@ -699,16 +712,21 @@ public class MainSystem : MonoBehaviour
                     {
                         away_Batters[away_turned_batter].GetComponent<Batter_Stats>().G_out++;
                     }
+                    int t = UnityEngine.Random.Range(0, 501);
+                    t = 4 - t / itl;
+                    if (t <= 0) t = 1;
+                    home_Pitcher.GetComponent<Pitcher_Stats>().CStamina -= t;
                 }
                 away_turned_batter = (away_turned_batter + 1) % 9;
             }
             else //회 말일 경우
             {
-                h += (home_Batters[home_turned_batter].GetComponent<Batter_Stats>().getpower() - away_Pitcher.GetComponent<Pitcher_Stats>().getspeed()) / 2;
-                c += (home_Batters[home_turned_batter].GetComponent<Batter_Stats>().getcontact() - away_Pitcher.GetComponent<Pitcher_Stats>().getcontrol());
-                bb += (home_Batters[home_turned_batter].GetComponent<Batter_Stats>().geteye() - away_Pitcher.GetComponent<Pitcher_Stats>().getcontrol()) / 4;
+                h += (home_Batters[home_turned_batter].GetComponent<Batter_Stats>().getpower() - away_Pitcher.GetComponent<Pitcher_Stats>().getspeed()) / 3;
+                c += (home_Batters[home_turned_batter].GetComponent<Batter_Stats>().getcontact() - away_Pitcher.GetComponent<Pitcher_Stats>().getcontrol())/3;
+                bb += (home_Batters[home_turned_batter].GetComponent<Batter_Stats>().geteye() - away_Pitcher.GetComponent<Pitcher_Stats>().getcontrol()) / 5;
 
                 int rslt = UnityEngine.Random.Range(1, 501);
+                int itl = home_Batters[home_turned_batter].GetComponent<Batter_Stats>().getintelligence();
                 if (rslt < h) //홈런일 때
                 {
                     int scored = 1;
@@ -719,6 +737,10 @@ public class MainSystem : MonoBehaviour
                     home_Batters[home_turned_batter].GetComponent<Batter_Stats>().Score += scored;
                     away_Pitcher.GetComponent<Pitcher_Stats>().Era += scored;
                     teamScoreHome += scored;
+                    int t = UnityEngine.Random.Range(0, 501);
+                    t = 6 - t / itl;
+                    if (t <= 0) t = 1;
+                    away_Pitcher.GetComponent<Pitcher_Stats>().CStamina -= t;
                 }
                 else if (rslt < c) // 안타일 때
                 {
@@ -1112,6 +1134,10 @@ public class MainSystem : MonoBehaviour
                             }
                         }
                     }
+                    int t = UnityEngine.Random.Range(0, 501);
+                    t = 6 - t / itl;
+                    if (t <= 0) t = 1;
+                    away_Pitcher.GetComponent<Pitcher_Stats>().CStamina -= t;
                 }
                 else if (rslt < c + bb) //볼넷일 때
                 {
@@ -1147,6 +1173,10 @@ public class MainSystem : MonoBehaviour
                     {
                         f_base = true;
                     }
+                    int t = UnityEngine.Random.Range(0, 501);
+                    t = 8 - t / itl;
+                    if (t <= 0) t = 1;
+                    away_Pitcher.GetComponent<Pitcher_Stats>().CStamina -= t;
                 }
                 else //아웃
                 {
@@ -1177,6 +1207,10 @@ public class MainSystem : MonoBehaviour
                     {
                         home_Batters[home_turned_batter].GetComponent<Batter_Stats>().G_out++;
                     }
+                    int t = UnityEngine.Random.Range(0, 501);
+                    t = 4 - t / itl;
+                    if (t <= 0) t = 1;
+                    away_Pitcher.GetComponent<Pitcher_Stats>().CStamina -= t;
                 }
                 home_turned_batter = (home_turned_batter + 1) % 9;
             }
@@ -1202,13 +1236,13 @@ public class MainSystem : MonoBehaviour
                 }
             }
 
-            if(home_Pitcher.GetComponent<Pitcher_Stats>().CStamina < 10 || 
+            if(home_Pitcher.GetComponent<Pitcher_Stats>().CStamina < 6 || 
                 (home_Pitcher.GetComponent<Pitcher_Stats>().getstamina()>=80 && home_Pitcher.GetComponent<Pitcher_Stats>().TodayEra > 4)||
                 (home_Pitcher.GetComponent<Pitcher_Stats>().getstamina()< 80 && home_Pitcher.GetComponent<Pitcher_Stats>().TodayEra > 2))
             {
                 teams[i].GetComponent<Team_Scripts>().Change_Pitcher(teamScoreHome - teamScoreAway);
             }
-            if (away_Pitcher.GetComponent<Pitcher_Stats>().CStamina < 10 ||
+            if (away_Pitcher.GetComponent<Pitcher_Stats>().CStamina < 6 ||
                 (away_Pitcher.GetComponent<Pitcher_Stats>().getstamina() >= 80 && away_Pitcher.GetComponent<Pitcher_Stats>().TodayEra > 4) ||
                 (away_Pitcher.GetComponent<Pitcher_Stats>().getstamina() < 80 && away_Pitcher.GetComponent<Pitcher_Stats>().TodayEra > 2))
             {
@@ -1236,7 +1270,7 @@ public class MainSystem : MonoBehaviour
             score_result_home = teamScoreHome;
             score_result_away = teamScoreAway;
         }
-    }
+    } //개발 남은 것 투구수 스태미나 만큼 빼는것
 
     public void Draft()
     {
