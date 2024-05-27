@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
     public string descSeasonRank = "Season Rank 변수 모음";
     public int myCurRank; // 플레이어 시즌 순위
     public List<Team_Scripts> rankList = new List<Team_Scripts>(10);// 시즌 순위 리스트
+    public GameObject noticePanel;
     
     [Header("Player")] 
     public string descPlayer = "Player Tab 변수 모음";
@@ -83,4 +84,17 @@ public class UIManager : MonoBehaviour
     
     // ------------------------- Player 기능 ---------------------------
     
+    
+    // ----기타----
+    public void CheckProgressMatchOrNot()
+    {
+        if (curMatch == 1)
+        {
+            noticePanel.SetActive(true);
+        }
+        else
+        {
+            noticePanel.SetActive(false);
+        }
+    }
 }
