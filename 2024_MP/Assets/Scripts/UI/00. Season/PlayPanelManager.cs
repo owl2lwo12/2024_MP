@@ -23,6 +23,12 @@ namespace UI.Season
         public TMP_Text leftScore;
         public TMP_Text rightScore;
         public TMP_Text winOrLose;
+
+        [Header("오브젝트 관리")] 
+        public GameObject loadingPanel;
+        public GameObject overBtn;
+        public GameObject teamGroup;
+        public GameObject scoreGroup;
         
         [SerializeField]
         private int[] _curMatch = new int[10];
@@ -94,10 +100,24 @@ namespace UI.Season
         {
             // 매치 진행 중인 패널 표시
             playingPanel.SetActive(true);
+            loadingPanel.SetActive(true);
+            overBtn.SetActive(false);
+            teamGroup.SetActive(false);
+            scoreGroup.SetActive(false);
+            
+            Invoke("OnLoadMatchResult", 2f);
             
             // UIManager에 OnStartMatch 실행
             UIManager.Instance.OnStartMatch();
             
+        }
+
+        public void OnLoadMatchResult()
+        {
+            loadingPanel.SetActive(false);
+            overBtn.SetActive(true);
+            teamGroup.SetActive(true);
+            scoreGroup.SetActive(true);
         }
 
         // 매치 패널에서 '경기 종료' 버튼 클릭 시
