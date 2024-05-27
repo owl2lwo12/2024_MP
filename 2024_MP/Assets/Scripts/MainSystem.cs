@@ -66,11 +66,11 @@ public class MainSystem : MonoBehaviour
         team_Rank.Sort(new Compare_Rank());
         for(int i = 0; i< 10; i++)
         { 
-            if(i > 0 &&team_Rank[i].GetComponent<Team_Scripts>().Win == team_Rank[i-1].GetComponent<Team_Scripts>().Win && team_Rank[i].GetComponent<Team_Scripts>().Draw == team_Rank[i-1].GetComponent<Team_Scripts>().Draw && team_Rank[i].GetComponent<Team_Scripts>().Lose == team_Rank[i - 1].GetComponent<Team_Scripts>().Lose)
+            /*if(i > 0 &&team_Rank[i].GetComponent<Team_Scripts>().Win == team_Rank[i-1].GetComponent<Team_Scripts>().Win && team_Rank[i].GetComponent<Team_Scripts>().Draw == team_Rank[i-1].GetComponent<Team_Scripts>().Draw && team_Rank[i].GetComponent<Team_Scripts>().Lose == team_Rank[i - 1].GetComponent<Team_Scripts>().Lose)
             {
                 team_Rank[i].GetComponent<Team_Scripts>().Rank = team_Rank[i-1].GetComponent<Team_Scripts>().Rank;
             }
-            else team_Rank[i].GetComponent<Team_Scripts>().Rank = i + 1;
+            else */team_Rank[i].GetComponent<Team_Scripts>().Rank = i + 1;
         }
         for(int i = 0; i < 10; i++)
         {
